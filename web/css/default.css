@@ -1,0 +1,74 @@
+/********************************************************************
+* This file is part of yourDashboard.
+*
+* Copyright 2014 Michael Batz
+*
+*
+* yourDashboard is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* yourDashboard is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with yourDashboard.  If not, see <http://www.gnu.org/licenses/>.
+*
+*********************************************************************/
+
+
+/**
+* Default settings for yourDashboard
+*/
+body
+{
+	background:		#FFFFFF;
+	height:			100%;
+
+	font-family:		sans-serif;
+	font-size:		12pt;
+}
+
+
+/**
+* header
+*/
+div.header
+{
+	width:			100%;
+	border-bottom:		solid 5px;
+}
+
+div.header h1
+{
+	font-size:		16pt;
+}
+
+/**
+* dashlets
+*/
+div.dashletContainer
+{
+	display:		table;
+	width:			100%;
+}
+
+div.dashletRow
+{
+	display:		table-row;
+}
+
+div.dashlet
+{
+	display:		table-cell;
+
+	border-style:		solid;
+	border-radius:  	5px;
+	border-width:		1px;
+	
+	margin:			30px;
+	padding:		5px;
+}
