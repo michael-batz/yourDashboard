@@ -1,4 +1,3 @@
-<?php
 /********************************************************************
 * This file is part of yourDashboard.
 *
@@ -20,38 +19,26 @@
 *
 *********************************************************************/
 
+//definition of functions
+
 /**
-* dashlet for dashboard
-* @author: Michael Batz <michael@yourcmdb.org>
+* Loads the content of a dashlet
 */
-abstract class Dashlet
+function loadDashlet(dashboardname, dashletid)
 {
-	//dashlet refresh interval [ms]
-	private $refresh;
-	
-	//dashlet parameters
-	private $parameter;
+	$( "#dashlet-" + dashletid ).load("ajax.php?content=dashlet&dashboard=" + dashboardname  + "&id=" + dashletid);
+};
 
-	/**
-	* Create a new dashlet
-	* @param $refresh	refresh interval [ms]
-	* @param $parameter	dashlet parameter
-	*/
-	function __construct($refresh, DashletParameter $parameter)
-	{
-		$this->refresh = $refresh;
-		$this->parameter = $parameter;
-	}
+/**
+* Starts the dashlet loader
+* loads dashlet for the first time
+* reloads the content every interval milliseconds
+*/
+function startDashletLoader(dashboardname, dashletid, interval)
+{
+	//load dashlet for the first time
+	loadDashlet(dashboardname, dashletid);
 
-	public function getRefreshInterval()
-	{
-		return $this->refresh;
-	}
-
-	/**
-	* return HTML output of dashlet
-	*/
-	abstract public function getHtmlContentString();
-
-}
-?>
+	//set up reloading of dashlet
+	window.setInterval(function() {loadDashlet(dashboardname, dashletid)}, interval);
+};

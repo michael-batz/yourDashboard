@@ -27,9 +27,9 @@
 class DashletError extends Dashlet
 {
 
-	public function render()
+	public function getHtmlContentString()
 	{
-		echo "Dashlet not found";
+		return "Dashlet not found";
 	}
 
 }

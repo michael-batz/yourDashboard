@@ -1,24 +1,24 @@
 <dashboard-configuration>
 	<dashboard name="default">
-		<dashlet class="DashletDummy">
+		<dashlet class="DashletDummy" refresh="30000">
 			<parameter key="title" value="Example Dashlet 1" />
 			<parameter key="text" value="Testtext1" />
 		</dashlet>
-		<dashlet class="DashletDummy">
+		<dashlet class="DashletDummy" refresh="10000">
 			<parameter key="title" value="Example Dashlet 2" />
 			<parameter key="text" value="Testtext2" />
 		</dashlet>
-		<dashlet class="DashletDummy">
+		<dashlet class="DashletDummy" refresh="5000">
 			<parameter key="title" value="Example Dashlet 2" />
 			<parameter key="text" value="Testtext2" />
 		</dashlet>
 	</dashboard>
 	<dashboard name="test1">
-		<dashlet class="DashletDummy">
+		<dashlet class="DashletDummy" refresh="10000">
 			<parameter key="title" value="Example Dashlet 3" />
 			<parameter key="text" value="Testtext3" />
 		</dashlet>
-		<dashlet class="DashletDummy">
+		<dashlet class="DashletDummy" refresh="5000">
 			<parameter key="title" value="Example Dashlet 4" />
 			<parameter key="text" value="Testtext4" />
 		</dashlet>

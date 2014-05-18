@@ -27,9 +27,10 @@
 class DashletDummy extends Dashlet
 {
 
-	public function render()
+	public function getHtmlContentString()
 	{
-		echo "Lorem Ipsum...";
+		$output = "Lorem Ipsum...<br />Date: ".date("d.m.y H:i:s");
+		return $output;
 	}
 
 }

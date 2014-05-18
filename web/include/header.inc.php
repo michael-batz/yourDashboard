@@ -32,6 +32,8 @@
 		<title>yourDashboard</title>
 		<link rel="stylesheet" type="text/css" href="css/default.css" />
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/functions.js"></script>
 	</head>
 	<body>
 		<div class="header">

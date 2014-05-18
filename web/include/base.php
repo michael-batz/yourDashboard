@@ -44,4 +44,33 @@ function __autoload($className)
 	}
 }
 
+/**
+* gets an HTTP GET variable or returns a default value
+*/
+function getHttpGetVar($variableName, $defaultValue)
+{
+	if(isset($_GET["$variableName"]))
+	{
+		return $_GET["$variableName"];
+	}
+	else
+	{
+		return $defaultValue;
+	}
+}
+
+/**
+* gets an HTTP POST variable or returns a default value
+*/
+function getHttpPostVar($variableName, $defaultValue)
+{
+	if(isset($_POST["$variableName"]))
+	{
+		return $_POST["$variableName"];
+	}
+	else
+	{
+		return $defaultValue;
+	}
+}
 ?>

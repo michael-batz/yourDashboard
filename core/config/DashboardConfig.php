@@ -52,6 +52,9 @@ class DashboardConfig
 			{
 				//save class
 				$dashletClass = (string)$dashlet['class'];
+
+				//save refresh interval
+				$dashletRefresh = (string)$dashlet['refresh'];
 				
 				//save parameters
 				$dashletParameter = new DashletParameter();
@@ -65,7 +68,7 @@ class DashboardConfig
 				//create dashlet
 				if(class_exists($dashletClass))
 				{
-					$dashboardDashlets[] = new $dashletClass($dashletParameter);
+					$dashboardDashlets[] = new $dashletClass($dashletRefresh, $dashletParameter);
 				}
 				else
 				{

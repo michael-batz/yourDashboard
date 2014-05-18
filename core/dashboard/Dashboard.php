@@ -51,15 +51,25 @@ class Dashboard
 		echo "<div class=\"dashletContainer\">\n";
 		echo "<div class=\"dashletRow\">\n";
 		//go through all dashlets
-		foreach($this->dashlets as $dashlet)
+		for($i=0; $i < count($this->dashlets); $i++)
 		{
-			echo "<div class=\"dashlet\">\n";
-			$dashlet->render();
+			$refreshInterval = $this->dashlets[$i]->getRefreshInterval();
+
+			echo "<div class=\"dashlet\" id=\"dashlet-$i\">\n";
+			echo "<script language=\"JavaScript\">startDashletLoader('$this->name', $i, $refreshInterval)</script>\n";
 			echo "</div>\n\n";
 		}
 		echo "</div>\n";
 		echo "</div>\n";
 	}
-	
+
+	/**
+	* Return Dashlet object for the given index
+	* @param $index		index of dashlet object
+	*/
+	public function getDashlet($index)
+	{
+		return $this->dashlets[$index];
+	}
 }
 ?>

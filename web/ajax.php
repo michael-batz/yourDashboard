@@ -21,37 +21,42 @@
 *********************************************************************/
 
 /**
-* dashlet for dashboard
+* yourDashboard AJAX Loader
+* loads content parts for the dashboard
+* for usage in ajax functions 
 * @author: Michael Batz <michael@yourcmdb.org>
 */
-abstract class Dashlet
+
+//load base functions and header
+require("include/base.php");
+
+//open controller
+$controller = new Controller();
+
+
+//check, which content should be loaded
+$content = getHttpGetVar("content", "");
+switch($content)
 {
-	//dashlet refresh interval [ms]
-	private $refresh;
-	
-	//dashlet parameters
-	private $parameter;
+	case "dashlet":
+			$dashboard = $controller->getDashboardObject(getHttpGetVar("dashboard", "default"));
+			$dashletId = getHttpGetVar("id", 0);
+			loadDashlet($dashboard, $dashletId);
+		break;
 
-	/**
-	* Create a new dashlet
-	* @param $refresh	refresh interval [ms]
-	* @param $parameter	dashlet parameter
-	*/
-	function __construct($refresh, DashletParameter $parameter)
-	{
-		$this->refresh = $refresh;
-		$this->parameter = $parameter;
-	}
-
-	public function getRefreshInterval()
-	{
-		return $this->refresh;
-	}
-
-	/**
-	* return HTML output of dashlet
-	*/
-	abstract public function getHtmlContentString();
-
+	default:
+		break;
 }
+
+
+/**
+* Loads and prints out the content of a specific dashlet
+* @param $dashboard	Dashboard object
+* @param $dashletId	Id of the dashlet
+*/
+function loadDashlet($dashboard, $dashletId)
+{
+	echo $dashboard->getDashlet($dashletId)->getHtmlContentString();
+}
+
 ?>
