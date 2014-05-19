@@ -54,6 +54,7 @@ div.dashletContainer
 {
 	display:		table;
 	width:			100%;
+	border-spacing:		20px;
 }
 
 div.dashletRow
@@ -66,9 +67,11 @@ div.dashlet
 	display:		table-cell;
 
 	border-style:		solid;
+	border-color:		#CCCCCC;
 	border-radius:  	5px;
 	border-width:		1px;
+
+	background:		#EEEEEE;
 	
-	margin:			30px;
 	padding:		5px;
 }
