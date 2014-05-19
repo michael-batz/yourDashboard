@@ -39,3 +39,23 @@
 		<div class="header">
 			<h1>yourDashboard</h1>
 		</div>
+		<div class="dashboardSelector">
+			<form name="dashboardSelector" action="index.php" method="GET">
+				Dashboard:
+				<select name="dashboard" onchange="javascript:document.forms['dashboardSelector'].submit()">
+					<?php
+						foreach($dashboardConfig->getDashboardNames() as $allDashboardsName)
+						{
+							if($allDashboardsName == $dashboardName)
+							{
+								echo "<option selected=\"selected\">$allDashboardsName</option>";
+							}
+							else
+							{
+								echo "<option>$allDashboardsName</option>";
+							}
+						}
+					?>
+				</select>
+			</form>
+		</div>

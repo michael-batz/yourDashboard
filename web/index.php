@@ -27,16 +27,19 @@
 
 //load base functions and header
 require("include/base.php");
-require("include/header.inc.php");
+
+//get dashboard name
+$dashboardName = getHttpGetVar("dashboard", "default");
+
 
 //open dashboard
 $controller = new Controller();
-$dashboard = $controller->getDashboardObject();
+$dashboard = $controller->getDashboardObject($dashboardName);
+$dashboardConfig = $controller->getConfig()->getDashboardConfig();
 
 //render dashboard
+require("include/header.inc.php");
 $dashboard->render();
-
-//load footer
 require("include/footer.inc.php");
 
 ?>
