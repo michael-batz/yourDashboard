@@ -40,8 +40,9 @@ switch($content)
 {
 	case "dashlet":
 			$dashboard = $controller->getDashboardObject(getHttpGetVar("dashboard", "default"));
+			$dashletRow = getHttpGetVar("row", 0);
 			$dashletId = getHttpGetVar("id", 0);
-			loadDashlet($dashboard, $dashletId);
+			loadDashlet($dashboard, $dashletRow, $dashletId);
 		break;
 
 	default:
@@ -52,11 +53,12 @@ switch($content)
 /**
 * Loads and prints out the content of a specific dashlet
 * @param $dashboard	Dashboard object
+* @param $dashletRow	Row of the dashlet
 * @param $dashletId	Id of the dashlet
 */
-function loadDashlet($dashboard, $dashletId)
+function loadDashlet($dashboard, $dashletRow, $dashletId)
 {
-	echo $dashboard->getDashlet($dashletId)->getHtmlContentString();
+	echo $dashboard->getDashlet($dashletRow, $dashletId)->getHtmlContentString();
 }
 
 ?>

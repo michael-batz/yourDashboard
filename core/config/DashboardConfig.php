@@ -46,34 +46,39 @@ class DashboardConfig
 			//save dashboard name
 			$dashboardName = (string)$dashboard['name'];
 
-			//generate dashlets
+			//generate dashlets and rows
 			$dashboardDashlets = Array();
-			foreach($dashboard->dashlet as $dashlet)
+			foreach($dashboard->row as $row)
 			{
-				//save class
-				$dashletClass = (string)$dashlet['class'];
+				$dashboardDashletsRow = Array();
+				foreach($row->dashlet as $dashlet)
+				{
+					//save class
+					$dashletClass = (string)$dashlet['class'];
 
-				//save refresh interval
-				$dashletRefresh = (string)$dashlet['refresh'];
-				
-				//save parameters
-				$dashletParameter = new DashletParameter();
-				foreach($dashlet[0]->parameter as $parameter)
-				{
-					$key = (string)$parameter['key'];
-					$value = (string)$parameter['value'];
-					$dashletParameter->addEntry($key, $value);
-				}
+					//save refresh interval
+					$dashletRefresh = (string)$dashlet['refresh'];
+					
+					//save parameters
+					$dashletParameter = new DashletParameter();
+					foreach($dashlet[0]->parameter as $parameter)
+					{
+						$key = (string)$parameter['key'];
+						$value = (string)$parameter['value'];
+						$dashletParameter->addEntry($key, $value);
+					}
 
-				//create dashlet
-				if(class_exists($dashletClass))
-				{
-					$dashboardDashlets[] = new $dashletClass($dashletRefresh, $dashletParameter);
+					//create dashlet
+					if(class_exists($dashletClass))
+					{
+						$dashboardDashletsRow[] = new $dashletClass($dashletRefresh, $dashletParameter);
+					}
+					else
+					{
+						$dashboardDashletsRow[] = new DashletError($dashletParameter);
+					}
 				}
-				else
-				{
-					$dashboardDashlets[] = new DashletError($dashletParameter);
-				}
+				$dashboardDashlets[] = $dashboardDashletsRow;
 			}
 
 			//generate and save dashboard object

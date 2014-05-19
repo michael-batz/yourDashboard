@@ -24,9 +24,9 @@
 /**
 * Loads the content of a dashlet
 */
-function loadDashlet(dashboardname, dashletid)
+function loadDashlet(dashboardname, dashletRow, dashletid)
 {
-	$( "#dashlet-" + dashletid ).load("ajax.php?content=dashlet&dashboard=" + dashboardname  + "&id=" + dashletid);
+	$( "#dashlet-" + dashletRow + "-" + dashletid ).load("ajax.php?content=dashlet&dashboard=" + dashboardname  + "&row=" + dashletRow  + "&id=" + dashletid);
 };
 
 /**
@@ -34,11 +34,11 @@ function loadDashlet(dashboardname, dashletid)
 * loads dashlet for the first time
 * reloads the content every interval milliseconds
 */
-function startDashletLoader(dashboardname, dashletid, interval)
+function startDashletLoader(dashboardname, dashletRow, dashletid, interval)
 {
 	//load dashlet for the first time
-	loadDashlet(dashboardname, dashletid);
+	loadDashlet(dashboardname, dashletRow, dashletid);
 
 	//set up reloading of dashlet
-	window.setInterval(function() {loadDashlet(dashboardname, dashletid)}, interval);
+	window.setInterval(function() {loadDashlet(dashboardname, dashletRow, dashletid)}, interval);
 };

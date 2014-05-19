@@ -49,27 +49,32 @@ class Dashboard
 	public function render()
 	{
 		echo "<div class=\"dashletContainer\">\n";
-		echo "<div class=\"dashletRow\">\n";
-		//go through all dashlets
-		for($i=0; $i < count($this->dashlets); $i++)
+		//go through all rows
+		for($j=0; $j < count($this->dashlets); $j++)
 		{
-			$refreshInterval = $this->dashlets[$i]->getRefreshInterval();
+			$row = $this->dashlets[$j];
+			echo "<div class=\"dashletRow\">\n";
+			for($i=0; $i < count($row); $i++)
+			{
+				$refreshInterval = $row[$i]->getRefreshInterval();
 
-			echo "<div class=\"dashlet\" id=\"dashlet-$i\">\n";
-			echo "<script language=\"JavaScript\">startDashletLoader('$this->name', $i, $refreshInterval)</script>\n";
-			echo "</div>\n\n";
+				echo "<div class=\"dashlet\" id=\"dashlet-$j-$i\">\n";
+				echo "<script language=\"JavaScript\">startDashletLoader('$this->name', $j, $i, $refreshInterval)</script>\n";
+				echo "</div>\n\n";
+			}
+			echo "</div>\n";
 		}
-		echo "</div>\n";
 		echo "</div>\n";
 	}
 
 	/**
 	* Return Dashlet object for the given index
+	* @param $row		row of dashlet object
 	* @param $index		index of dashlet object
 	*/
-	public function getDashlet($index)
+	public function getDashlet($row, $index)
 	{
-		return $this->dashlets[$index];
+		return $this->dashlets[$row][$index];
 	}
 }
 ?>
