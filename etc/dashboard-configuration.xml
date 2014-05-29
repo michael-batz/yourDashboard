@@ -1,9 +1,11 @@
 <dashboard-configuration>
 	<dashboard name="default">
 		<row>
-			<dashlet class="DashletDummy" refresh="30000">
-				<parameter key="title" value="Example Dashlet 1" />
-				<parameter key="text" value="Testtext1" />
+			<dashlet class="DashletOpenNMSOutages" refresh="30000">
+				<parameter key="title" value="OpenNMS Outages" />
+				<parameter key="restUrl" value="http://192.168.0.102:8980/opennms/rest" />
+				<parameter key="restUser" value="admin" />
+				<parameter key="restPassword" value="admin" />
 			</dashlet>
 			<dashlet class="DashletDummy" refresh="10000">
 				<parameter key="title" value="Example Dashlet 2" />

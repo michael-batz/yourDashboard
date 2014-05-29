@@ -82,3 +82,48 @@ div.dashlet
 	
 	padding:		5px;
 }
+
+div.dashlet h1
+{
+	width:			100%;
+	margin:			0px;
+
+	background:		#000000;
+
+	color:			#FFFFFF;
+	font-size:		14pt;
+	text-align:		center;
+}
+
+/**
+* dashlet tables
+*/
+div.dashlet table
+{
+	width:			85%;
+	margin:			auto;
+	
+	border-width:		1px;
+	border-style:		solid;
+	border-radius:		5px;
+	border-color:		#CCCCCC;
+}
+
+div.dashlet td
+{
+	border-bottom:		solid, 1px;
+	padding:		10px;
+}
+
+tr.critical td
+{
+	background-color:	#F5CDCD;
+}
+tr.major td
+{
+	background-color:	#880000;
+}
+tr.minor td
+{
+	background-color:	#440000;
+}

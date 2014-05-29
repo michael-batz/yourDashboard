@@ -33,7 +33,7 @@ function __autoload($className)
 {
 	$scriptBaseDir = dirname(__FILE__);
 	$coreBaseDir = realpath("$scriptBaseDir/../../core");
-	$paths = array('', 'dashboard', 'dashboard/dashlets', 'config', 'controller');
+	$paths = array('', 'dashboard', 'dashboard/dashlets', 'config', 'controller', 'connectors');
 	$filename = $className.'.php';
 	foreach($paths as $path)
 	{
