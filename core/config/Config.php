@@ -29,6 +29,9 @@ class Config
 	//dashboard configuration object
 	private $configDashboard;
 
+	//customizing configuration object
+	private $configCustomizing;
+
 	/**
 	* Creates a configuration object
 	*/
@@ -36,6 +39,7 @@ class Config
 	{
 		$configurationBase = realpath(dirname(__FILE__)."/../../etc");
 		$this->configDashboard = new DashboardConfig("$configurationBase/dashboard-configuration.xml");
+		$this->configCustomizing = new CustomizingConfig("$configurationBase/customizing-configuration.xml");
 	}
 
 
@@ -46,6 +50,15 @@ class Config
 	{
 		return $this->configDashboard;
 	}
+
+	/**
+	* Return customizing configuration
+	*/
+	public function getCustomizingConfig()
+	{
+		return $this->configCustomizing;
+	}
+
 }
 
 

@@ -36,26 +36,38 @@
 		<script src="js/functions.js"></script>
 	</head>
 	<body>
-		<div class="header">
-			<h1>yourDashboard</h1>
-		</div>
-		<div class="dashboardSelector">
-			<form name="dashboardSelector" action="index.php" method="GET">
-				Dashboard:
-				<select name="dashboard" onchange="javascript:document.forms['dashboardSelector'].submit()">
-					<?php
-						foreach($dashboardConfig->getDashboardNames() as $allDashboardsName)
-						{
-							if($allDashboardsName == $dashboardName)
+		<?php
+			if($customizingConfig->getShowHeader())
+			{?>
+				<div class="header">
+					<h1>
+						<img src="<?php echo $customizingConfig->getLogo(); ?>" alt="logo" />
+						<?php echo $customizingConfig->getTitle(); ?>
+					</h1>
+				</div>
+			<?php
+			}
+			if($customizingConfig->getShowSelector())
+			{?>
+				<div class="dashboardSelector">
+					<form name="dashboardSelector" action="index.php" method="GET">
+					Dashboard:
+					<select name="dashboard" onchange="javascript:document.forms['dashboardSelector'].submit()">
+						<?php
+							foreach($dashboardConfig->getDashboardNames() as $allDashboardsName)
 							{
-								echo "<option selected=\"selected\">$allDashboardsName</option>";
+								if($allDashboardsName == $dashboardName)
+								{
+									echo "<option selected=\"selected\">$allDashboardsName</option>";
+								}
+								else
+								{
+									echo "<option>$allDashboardsName</option>";
+								}
 							}
-							else
-							{
-								echo "<option>$allDashboardsName</option>";
-							}
-						}
-					?>
-				</select>
-			</form>
-		</div>
+							?>
+						</select>
+					</form>
+				</div>
+			<?php
+			}?>

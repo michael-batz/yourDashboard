@@ -30,16 +30,31 @@ require("include/base.php");
 
 //get dashboard name
 $dashboardName = getHttpGetVar("dashboard", "default");
-
+$errorMessage = "";
 
 //open dashboard
 $controller = new Controller();
-$dashboard = $controller->getDashboardObject($dashboardName);
+try
+{
+	$dashboard = $controller->getDashboardObject($dashboardName);
+}
+catch(Exception $e)
+{
+	$errorMessage = $e->getMessage();
+}
 $dashboardConfig = $controller->getConfig()->getDashboardConfig();
+$customizingConfig = $controller->getConfig()->getCustomizingConfig();
 
 //render dashboard
 require("include/header.inc.php");
-$dashboard->render();
+if(isset($dashboard))
+{
+	$dashboard->render();
+}
+else
+{
+	echo $errorMessage;
+}
 require("include/footer.inc.php");
 
 ?>

@@ -21,24 +21,15 @@
 *********************************************************************/
 
 /**
-* error dashlet: shown when dashlet class not found
-* @author: Michael Batz <michael@yourcmdb.org>
+* Exception, if something went wrong in Dashlet
+* @author Michael Batz <michael@yourcmdb.org>
 */
-class DashletError extends Dashlet
+class DashletException extends Exception
 {
 
-	/**
-	* parameters:
-	* - message: error message
-	*/
-	public function getHtmlContentString()
+	public function __construct($message, $code = 0)
 	{
-		$output = "Dashlet Error";
-		if($this->parameter->getValue("message") != "")
-		{
-			$output .= $this->parameter->getValue("message");
-		}
-		return $output;
+        	parent::__construct($message, $code);
 	}
 
 }

@@ -76,5 +76,15 @@ class Dashboard
 	{
 		return $this->dashlets[$row][$index];
 	}
+
+	/**
+	* Returns an DashletError object, if something went wrong
+	*/
+	public function getErrorDashlet($errorMessage)
+	{
+		$dashletParameter = new DashletParameter();
+		$dashletParameter->addEntry("message", $errorMessage);
+		return new DashletError(30, $dashletParameter);
+	}
 }
 ?>

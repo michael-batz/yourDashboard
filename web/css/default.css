@@ -45,6 +45,13 @@ div.header
 div.header h1
 {
 	font-size:		16pt;
+	margin-bottom:		0px;
+	margin-top:		0px;
+}
+
+div.header img
+{
+	vertical-align:		middle;
 }
 
 /**

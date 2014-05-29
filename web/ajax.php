@@ -58,7 +58,14 @@ switch($content)
 */
 function loadDashlet($dashboard, $dashletRow, $dashletId)
 {
-	echo $dashboard->getDashlet($dashletRow, $dashletId)->getHtmlContentString();
+	try
+	{
+		echo $dashboard->getDashlet($dashletRow, $dashletId)->getHtmlContentString();
+	}
+	catch(Exception $e)
+	{
+		echo $dashboard->getErrorDashlet($e->getMessage())->getHtmlContentString();
+	}
 }
 
 ?>

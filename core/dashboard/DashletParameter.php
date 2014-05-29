@@ -42,7 +42,14 @@ class DashletParameter
 
 	public function getValue($key)
 	{
-		return $this->parameter[$key];
+		if(isset($this->parameter[$key]))
+		{
+			return $this->parameter[$key];
+		}
+		else
+		{
+			return "";
+		}
 	}
 	
 	public function addEntry($key, $value)

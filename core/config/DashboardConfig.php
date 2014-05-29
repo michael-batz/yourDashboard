@@ -75,7 +75,9 @@ class DashboardConfig
 					}
 					else
 					{
-						$dashboardDashletsRow[] = new DashletError($dashletParameter);
+						$dashletParameter = new DashletParameter();
+						$dashletParameter->addEntry("message", "Dashlet class not found");
+						$dashboardDashletsRow[] = new DashletError($dashletRefresh, $dashletParameter);
 					}
 				}
 				$dashboardDashlets[] = $dashboardDashletsRow;
@@ -93,7 +95,14 @@ class DashboardConfig
 	*/
 	public function getDashboard($name)
 	{
-		return $this->dashboards[$name];
+		if(isset($this->dashboards[$name]))
+		{
+			return $this->dashboards[$name];
+		}
+		else
+		{
+			throw new DashboardException("Dashboard $name not found");
+		}
 	}
 
 	/**

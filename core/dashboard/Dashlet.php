@@ -27,10 +27,10 @@
 abstract class Dashlet
 {
 	//dashlet refresh interval [ms]
-	private $refresh;
+	protected $refresh;
 	
 	//dashlet parameters
-	private $parameter;
+	protected $parameter;
 
 	/**
 	* Create a new dashlet

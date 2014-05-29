@@ -1,0 +1,6 @@
+<customizing-configuration>
+	<title>yourDashboard</title>
+	<logo>img/logo.png</logo>
+	<show-header>1</show-header>
+	<show-selector>1</show-selector>
+</customizing-configuration>
