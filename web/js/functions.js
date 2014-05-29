@@ -40,5 +40,8 @@ function startDashletLoader(dashboardname, dashletRow, dashletid, interval)
 	loadDashlet(dashboardname, dashletRow, dashletid);
 
 	//set up reloading of dashlet
-	window.setInterval(function() {loadDashlet(dashboardname, dashletRow, dashletid)}, interval);
+	$( window  ).load(function()
+	{
+		window.setInterval(function() {loadDashlet(dashboardname, dashletRow, dashletid)}, interval);
+	});
 };
