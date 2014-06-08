@@ -34,12 +34,37 @@ class DashletOpenNMSOutages extends Dashlet
 		$restUrl = $this->parameter->getValue("restUrl");
 		$restUser = $this->parameter->getValue("restUser");
 		$restPassword = $this->parameter->getValue("restPassword");
+		$outagesCategory = $this->parameter->getValue("outagesCategory");
 		
 		//open connector
 		$connector = new ConnectorOpenNMS($restUrl, $restUser, $restPassword);
 
 		//get current outages as SimpleXmlObject
 		$outagesXml = simplexml_load_string($connector->getData("outages?ifRegainedService=null&orderBy=ifLostService&order=desc"));
+
+		//if outagesCategory is defined, get all nodes of category
+		if($outagesCategory != "")
+		{
+			//get all nodes
+			$nodeFilter = Array();
+			$nodesXml = simplexml_load_string($connector->getData("nodes?limit=0"));
+			foreach($nodesXml->xpath('//node') as $node)
+			{
+				//check categories of the node
+				foreach($node->categories as $category)
+				{
+					//if node is in category defined in $outagesCategory
+					$nodeCategoryName = (string) $category["name"];
+					if($nodeCategoryName == $outagesCategory)
+					{
+						//add node to filter
+						$nodeId = (string)$node["id"];
+						$nodeFilter[] = $nodeId;
+					}
+				}
+			}
+			
+		}
 
 		//create outage array
 		$outagesNodeDown = Array();
@@ -51,6 +76,12 @@ class DashletOpenNMSOutages extends Dashlet
 			$outageNodeId = (string) $outage->serviceLostEvent[0]->nodeId[0];
 			$outageNode = (string) $outage->serviceLostEvent[0]->nodeLabel[0];
 			$outageUei = (string) $outage->serviceLostEvent[0]->uei[0];
+
+			//if nodeFilter is defined and node is not in filter -> go to the next outage
+			if(isset($nodeFilter) && array_search($outageNodeId, $nodeFilter) === FALSE)
+			{
+				continue;
+			}
 
 			switch($outageUei)
 			{
