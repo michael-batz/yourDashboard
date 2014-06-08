@@ -121,9 +121,9 @@ tr.critical td
 }
 tr.major td
 {
-	background-color:	#880000;
+	background-color:	#FFCDCD;
 }
 tr.minor td
 {
-	background-color:	#440000;
+	background-color:	#FFF5CD;
 }

@@ -67,15 +67,14 @@ class DashletOpenNMSOutages extends Dashlet
 		}
 
 		//create outage array
-		$outagesNodeDown = Array();
-		$outagesInterfaceDown = Array();
-		$outagesNodeLostService = Array();
+		$outagesRecord = Array();
 		foreach($outagesXml->xpath('//outage') as $outage)
 		{
 			$outageId = (string) $outage['id'];
 			$outageNodeId = (string) $outage->serviceLostEvent[0]->nodeId[0];
 			$outageNode = (string) $outage->serviceLostEvent[0]->nodeLabel[0];
 			$outageUei = (string) $outage->serviceLostEvent[0]->uei[0];
+			$outageTimestamp = strtotime((string) $outage->serviceLostEvent[0]->time[0]);
 
 			//if nodeFilter is defined and node is not in filter -> go to the next outage
 			if(isset($nodeFilter) && array_search($outageNodeId, $nodeFilter) === FALSE)
@@ -86,13 +85,34 @@ class DashletOpenNMSOutages extends Dashlet
 			switch($outageUei)
 			{
 				case "uei.opennms.org/nodes/nodeDown":
-					$outagesNodeDown[] = array("id" => $outageId, "nodelabel" => $outageNode);
+					//show only one record per node
+					if(	isset($outagesRecord[$outageNodeId]["timestamp"]) && 
+						$outagesRecord[$outageNodeId]["timestamp"] >= $outageTimestamp &&
+						$outagesRecord[$outageNodeId]["type"] == "nodeDown")
+					{
+						break;
+					}
+					$outagesRecord[$outageNodeId] = array("id" => $outageId, "nodelabel" => $outageNode, "timestamp" => $outageTimestamp, "type" => "nodeDown");
 					break;
 				case "uei.opennms.org/nodes/interfaceDown":
-					$outagesInterfaceDown[] = array("id" => $outageId, "nodelabel" => $outageNode);
+					//show only one record per node
+					if(	isset($outagesRecord[$outageNodeId]["timestamp"]) && 
+						($outagesRecord[$outageNodeId]["type"] == "nodeDown" || 
+						($outagesRecord[$outageNodeId]["type"] == "interfaceDown" && $outagesRecord[$outageNodeId]["timestamp"] >= $outageTimestamp)))
+					{
+						break;
+					}
+					$outagesRecord[$outageNodeId] = array("id" => $outageId, "nodelabel" => $outageNode, "timestamp" => $outageTimestamp, "type" => "interfaceDown");
 					break;
 				case "uei.opennms.org/nodes/nodeLostService":
-					$outagesNodeLostService[] = array("id" => $outageId, "nodelabel" => $outageNode);
+					//show only one record per node
+					if(    	isset($outagesRecord[$outageNodeId]["timestamp"]) &&
+						($outagesRecord[$outageNodeId]["type"] != "nodeLostService" || 
+						($outagesRecord[$outageNodeId]["type"] == "nodeLostService" && $outagesRecord[$outageNodeId]["timestamp"] >= $outageTimestamp)))
+					{
+						break;
+					}
+					$outagesRecord[$outageNodeId] = array("id" => $outageId, "nodelabel" => $outageNode, "timestamp" => $outageTimestamp, "type" => "nodeLostService");
 					break;
 
 			}
@@ -102,17 +122,22 @@ class DashletOpenNMSOutages extends Dashlet
 		$output = "";
 		$output .= "<h1>$title</h1>";
 		$output .= "<table>";
-		foreach($outagesNodeDown as $outage)
+		foreach($outagesRecord as $outage)
 		{
-			$output .= "<tr class=\"critical\"><td>{$outage['nodelabel']}</td></tr>";
-		}
-		foreach($outagesInterfaceDown as $outage)
-		{
-			$output .= "<tr class=\"major\"><td>{$outageNode['nodelabel']}</td></tr>";
-		}
-		foreach($outagesNodeLostService as $outage)
-		{
-			$output .= "<tr class=\"minor\"><td>{$outageNode['nodelabel']}</td></tr>";
+			switch($outage["type"])
+			{
+				case "nodeDown":
+					$output .= "<tr class=\"critical\"><td>{$outage['nodelabel']}</td></tr>";
+					break;
+
+				case "interfaceDown":
+					$output .= "<tr class=\"major\"><td>{$outage['nodelabel']}</td></tr>";
+					break;
+
+				case "nodeLostService":
+					$output .= "<tr class=\"minor\"><td>{$outage['nodelabel']}</td></tr>";
+					break;
+			}
 		}
 
 		$output  .= "</table>";
