@@ -7,7 +7,7 @@
 				<parameter key="restUser" value="admin" />
 				<parameter key="restPassword" value="admin" />
 				<parameter key="linkUrlBase" value="http://10.0.1.106:8980/opennms" />
-				<parameter key="maxEntries" value="2" />
+				<parameter key="maxEntries" value="10" />
 			</dashlet>
 			<dashlet class="DashletOpenNMSOutages" refresh="30000">
 				<parameter key="title" value="OpenNMS Outages in category Cisco" />
@@ -15,16 +15,7 @@
 				<parameter key="restUser" value="admin" />
 				<parameter key="restPassword" value="admin" />
 				<parameter key="outagesCategory" value="Ciisco" />
-			</dashlet>
-		</row>
-		<row>
-			<dashlet class="DashletDummy" refresh="10000">
-				<parameter key="title" value="Example Dashlet 3" />
-				<parameter key="text" value="Testtext3" />
-			</dashlet>
-			<dashlet class="DashletDummy" refresh="5000">
-				<parameter key="title" value="Example Dashlet 4" />
-				<parameter key="text" value="Testtext4" />
+				<parameter key="maxEntries" value="10" />
 			</dashlet>
 		</row>
 	</dashboard>
