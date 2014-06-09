@@ -42,6 +42,10 @@ class DashletOpenNMSOutages extends Dashlet
 
 		//get current outages as SimpleXmlObject
 		$outagesXml = simplexml_load_string($connector->getData("outages?ifRegainedService=null&orderBy=ifLostService&order=desc"));
+		if($outagesXml === FALSE)
+		{
+			throw new DashletException("Error connecting to OpenNMS");
+		}
 
 		//if outagesCategory is defined, get all nodes of category
 		if($outagesCategory != "")
@@ -49,6 +53,11 @@ class DashletOpenNMSOutages extends Dashlet
 			//get all nodes
 			$nodeFilter = Array();
 			$nodesXml = simplexml_load_string($connector->getData("nodes?limit=0"));
+			if($nodesXml === FALSE)
+			{
+				throw new DashletException("Error connecting to OpenNMS");
+			}
+
 			foreach($nodesXml->xpath('//node') as $node)
 			{
 				//check categories of the node
@@ -124,6 +133,11 @@ class DashletOpenNMSOutages extends Dashlet
 		$output .= "<h1>$title</h1>";
 		$output .= "<table>";
 		$i = 0;
+		//if there are no outages
+		if(count($outagesRecord) <= 0)
+		{
+			$output .= "<tr class=\"info\"><td>no outages</td></tr>";
+		}
 		foreach($outagesRecord as $outage)
 		{
 			//check, if output is too long
