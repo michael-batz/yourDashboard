@@ -35,6 +35,7 @@ class DashletOpenNMSOutages extends Dashlet
 		$restUser = $this->parameter->getValue("restUser");
 		$restPassword = $this->parameter->getValue("restPassword");
 		$outagesCategory = $this->parameter->getValue("outagesCategory");
+		$maxEntries = $this->parameter->getValue("maxEntries");
 		
 		//open connector
 		$connector = new ConnectorOpenNMS($restUrl, $restUser, $restPassword);
@@ -122,8 +123,15 @@ class DashletOpenNMSOutages extends Dashlet
 		$output = "";
 		$output .= "<h1>$title</h1>";
 		$output .= "<table>";
+		$i = 0;
 		foreach($outagesRecord as $outage)
 		{
+			//check, if output is too long
+			if($maxEntries != "" && $i >= $maxEntries)
+			{
+				break;
+			}
+
 			//calculate outage interval
 			$outageInterval = time() - $outage["timestamp"];
 
@@ -157,9 +165,18 @@ class DashletOpenNMSOutages extends Dashlet
 					$output .= "<tr class=\"minor\"><td>{$outage['nodelabel']} ($outageIntervalString)</td></tr>";
 					break;
 			}
+			
+			$i++;
 		}
 
 		$output  .= "</table>";
+
+		//message, if output was too long
+		if($maxEntries != "" && count($outagesRecord) > $maxEntries)
+		{
+			$countMissing = count($outagesRecord) - $maxEntries;
+			$output .= "<p>$countMissing more nodes with outages...</p>";
+		}
 
 		//return output
 		return $output;
