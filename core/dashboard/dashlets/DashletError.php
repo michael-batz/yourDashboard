@@ -33,10 +33,12 @@ class DashletError extends Dashlet
 	*/
 	public function getHtmlContentString()
 	{
-		$output = "Dashlet Error";
+		$output = "<h1>Dashlet Error</h1>";
 		if($this->parameter->getValue("message") != "")
 		{
+			$output .= "<p>";
 			$output .= $this->parameter->getValue("message");
+			$output .= "</p>";
 		}
 		return $output;
 	}

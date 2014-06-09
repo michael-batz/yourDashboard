@@ -36,6 +36,7 @@ class DashletOpenNMSOutages extends Dashlet
 		$restPassword = $this->parameter->getValue("restPassword");
 		$outagesCategory = $this->parameter->getValue("outagesCategory");
 		$maxEntries = $this->parameter->getValue("maxEntries");
+		$linkUrlBase = $this->parameter->getValue("linkUrlBase");
 		
 		//open connector
 		$connector = new ConnectorOpenNMS($restUrl, $restUser, $restPassword);
@@ -131,12 +132,12 @@ class DashletOpenNMSOutages extends Dashlet
 		//generate output
 		$output = "";
 		$output .= "<h1>$title</h1>";
-		$output .= "<table>";
+		$output .= "<table class=\"severity\">";
 		$i = 0;
 		//if there are no outages
 		if(count($outagesRecord) <= 0)
 		{
-			$output .= "<tr class=\"info\"><td>no outages</td></tr>";
+			$output .= "<tr class=\"cleared\"><td>no outages</td></tr>";
 		}
 		foreach($outagesRecord as $outage)
 		{
@@ -168,29 +169,30 @@ class DashletOpenNMSOutages extends Dashlet
 			switch($outage["type"])
 			{
 				case "nodeDown":
-					$output .= "<tr class=\"critical\"><td>{$outage['nodelabel']} ($outageIntervalString)</td></tr>";
+					$output .= "<tr class=\"major\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']} ($outageIntervalString)</a></td></tr>";
 					break;
 
 				case "interfaceDown":
-					$output .= "<tr class=\"major\"><td>{$outage['nodelabel']} ($outageIntervalString)</td></tr>";
+					$output .= "<tr class=\"minor\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']} ($outageIntervalString)</a></td></tr>";
 					break;
 
 				case "nodeLostService":
-					$output .= "<tr class=\"minor\"><td>{$outage['nodelabel']} ($outageIntervalString)</td></tr>";
+					$output .= "<tr class=\"warning\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']} ($outageIntervalString)</a></td></tr>";
 					break;
 			}
 			
 			$i++;
 		}
 
-		$output  .= "</table>";
 
 		//message, if output was too long
 		if($maxEntries != "" && count($outagesRecord) > $maxEntries)
 		{
 			$countMissing = count($outagesRecord) - $maxEntries;
-			$output .= "<p>$countMissing more nodes with outages...</p>";
+			$output .= "<tr class=\"major\"><td>$countMissing more nodes with outages...</td></tr>";
 		}
+
+		$output  .= "</table>";
 
 		//return output
 		return $output;
