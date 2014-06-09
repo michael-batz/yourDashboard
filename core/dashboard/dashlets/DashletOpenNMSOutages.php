@@ -124,18 +124,37 @@ class DashletOpenNMSOutages extends Dashlet
 		$output .= "<table>";
 		foreach($outagesRecord as $outage)
 		{
+			//calculate outage interval
+			$outageInterval = time() - $outage["timestamp"];
+
+			//define outageIntervalString
+			$outageIntervalString = "$outageInterval sec";
+			if($outageInterval > 60)
+			{
+				$outageIntervalString = round($outageInterval / 60) . " min";
+			}
+			if($outageInterval > 3600)
+			{
+				$outageIntervalString = round($outageInterval / 3600) . " h";
+			}
+			if($outageInterval > 86400)
+			{
+				$outageIntervalString = round($outageInterval / 86400) . " d";
+			}
+
+			//create output
 			switch($outage["type"])
 			{
 				case "nodeDown":
-					$output .= "<tr class=\"critical\"><td>{$outage['nodelabel']}</td></tr>";
+					$output .= "<tr class=\"critical\"><td>{$outage['nodelabel']} ($outageIntervalString)</td></tr>";
 					break;
 
 				case "interfaceDown":
-					$output .= "<tr class=\"major\"><td>{$outage['nodelabel']}</td></tr>";
+					$output .= "<tr class=\"major\"><td>{$outage['nodelabel']} ($outageIntervalString)</td></tr>";
 					break;
 
 				case "nodeLostService":
-					$output .= "<tr class=\"minor\"><td>{$outage['nodelabel']}</td></tr>";
+					$output .= "<tr class=\"minor\"><td>{$outage['nodelabel']} ($outageIntervalString)</td></tr>";
 					break;
 			}
 		}
