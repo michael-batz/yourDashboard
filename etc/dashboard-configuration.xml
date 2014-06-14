@@ -29,6 +29,15 @@
 				<parameter key="linkUrlBase" value="http://10.0.1.106:8980/opennms" />
 				<parameter key="maxEntries" value="10" />
 			</dashlet>
+			<dashlet class="DashletOtrsQueue" refresh="30000">
+				<parameter key="title" value="OTRS Tickets in Eingang" />
+				<parameter key="soapUrl" value="http://10.0.1.106/otrs/nph-genericinterface.pl/WebserviceID/1" />
+				<parameter key="soapUser" value="yourdashboard" />
+				<parameter key="soapPassword" value="yourdashboard" />
+				<parameter key="queue" value="Eingang" />
+				<parameter key="linkUrlBase" value="http://10.0.1.106/otrs" />
+				<parameter key="maxEntries" value="10" />
+			</dashlet>
 		</row>
 	</dashboard>
 	<dashboard name="test1">

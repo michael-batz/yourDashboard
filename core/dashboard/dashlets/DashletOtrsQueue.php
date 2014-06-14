@@ -20,58 +20,35 @@
 *
 *********************************************************************/
 
-
 /**
-* base functions
+* dashlet to show the last tickets of an OTRS queue
 * @author: Michael Batz <michael@yourcmdb.org>
 */
-
-
-/**
-* autoloading of classes
-*/
-function __autoload($className)
+class DashletOtrsQueue extends Dashlet
 {
-	$scriptBaseDir = dirname(__FILE__);
-	$coreBaseDir = realpath("$scriptBaseDir/../../core");
-	$paths = array('', 'dashboard', 'dashboard/dashlets', 'config', 'controller', 'connectors');
-	$filename = $className.'.php';
-	foreach($paths as $path)
-	{
-		if(file_exists("$coreBaseDir/$path/$filename"))
-		{
-			include "$coreBaseDir/$path/$filename";
-		}
-	}
-}
 
-/**
-* gets an HTTP GET variable or returns a default value
-*/
-function getHttpGetVar($variableName, $defaultValue)
-{
-	if(isset($_GET["$variableName"]))
+	public function getHtmlContentString()
 	{
-		return $_GET["$variableName"];
-	}
-	else
-	{
-		return $defaultValue;
-	}
-}
+		//get parameters
+		$title = $this->parameter->getValue("title");
+		$soapUrl = $this->parameter->getValue("soapUrl");
+		$soapUser = $this->parameter->getValue("soapUser");
+		$soapPassword = $this->parameter->getValue("soapPassword");
+		$queue = $this->parameter->getValue("queue");
+		$maxEntries = $this->parameter->getValue("maxEntries");
+		$linkUrlBase = $this->parameter->getValue("linkUrlBase");
+		
+		//open connector
+		$connector = new ConnectorOtrs($soapUrl, $soapUser, $soapPassword);
 
-/**
-* gets an HTTP POST variable or returns a default value
-*/
-function getHttpPostVar($variableName, $defaultValue)
-{
-	if(isset($_POST["$variableName"]))
-	{
-		return $_POST["$variableName"];
+		$return = $connector->getTickets($queue);
+
+		//generate output
+		$output = htmlspecialchars(print_r($return, true));
+
+		//return output
+		return $output;
 	}
-	else
-	{
-		return $defaultValue;
-	}
+
 }
 ?>
