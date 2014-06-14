@@ -114,63 +114,99 @@ div.dashlet h1
 }
 
 /**
-* dashlet tables
+* severity tables
 */
-div.dashlet table.severity
+table.severity
 {
-	width:			85%;
-	margin-left:		auto;
-	margin-right:		auto;
+	width:				85%;
+	margin-left:			auto;
+	margin-right:			auto;
 	
-	border-spacing: 	0px;
+	border-spacing: 		0px;
+	border-collapse:		separate;
 }
 
 table.severity td
 {	
-	border:			1px solid;
-	border-radius:		5px;
-	padding:		15px;
-	padding-left:		60px;
-	background-repeat:	no-repeat;
-	background-position:	10px center;
+	border-bottom:			1px solid;
+	border-top:			1px solid;
+	padding:			15px;
 }
 
-tr.critical td
+table.severity td:first-child
+{
+	border-left:			1px solid;
+	border-top-left-radius:		5px;
+	border-bottom-left-radius:	5px;
+	background-repeat:		no-repeat;
+	background-position:		10px center;
+	padding-left:			60px;
+}
+
+table.severity td:last-child
+{
+	border-right:			1px solid;
+	border-top-right-radius:	5px;
+	border-bottom-right-radius:	5px;
+}
+
+
+tr.critical td, tr.critical td:first-child, tr.critical td:last-child
+{
+	border-color:		#C00;
+	background-color:	#F5CDCD;
+}
+tr.critical td:first-child
 {
 	background-image:	url(../img/icons/critical.png);
-	background-color:	#F5CDCD;
-	border-color:		#C00;
 }
-tr.major td
+
+tr.major td, tr.major td:first-child, tr.major td:last-child
+{
+	border-color:		#F30;
+	background-color:	#FFD7CD;
+}
+tr.major td:first-child
 {
 	background-image:	url(../img/icons/major.png);
-	background-color:	#FFD7CD;
-	border-color:		#F30;
 }
-tr.minor td
+
+tr.minor td, tr.minor td:first-child, tr.minor td:last-child
+{
+	border-color:		#F90;
+	background-color:	#FFEBCD;
+}
+tr.minor td:first-child
 {
 	background-image:	url(../img/icons/minor.png);
-	background-color:	#FFEBCD;
-	border-color:		#F90;
 }
 
-tr.warning td
+tr.warning td, tr.warning td:first-child, tr.warning td:last-child
+{
+	border-color:		#FC0;
+	background-color:	#FFF5CD;
+}
+tr.warning td:first-child
 {
 	background-image:	url(../img/icons/warning.png);
-	background-color:	#FFF5CD;
-	border-color:		#FC0;
 }
 
-tr.info td 
+tr.info td, tr.info td:first-child, tr.info td:last-child
+{
+	border-color:		#360;
+	background-color:	#D7E1CD;
+}
+tr.info td:first-child
 {
 	background-image:	url(../img/icons/info.png);
-	background-color:	#D7E1CD;
-	border-color:		#360;
 }
 
-tr.cleared td 
+tr.cleared td, tr.cleared td:first-child, tr.cleared td:last-child
+{
+	border-color:		#CCC;
+	background-color:	#CCC;
+}
+tr.cleared td:first-child
 {
 	background-image:	url(../img/icons/cleared.png);
-	background-color:	#CCC;
-	border-color:		#CCC;
 }
