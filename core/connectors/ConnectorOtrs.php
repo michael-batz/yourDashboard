@@ -54,22 +54,57 @@ class ConnectorOtrs
 
 	/**
 	* Gets tickets from OTRS
-	* @param $resource resource
+	* @param $queue name of the queue to get tickets
+	* @param $limit max count of output entries
+	* @return array with ticketIDs
 	*/
-	public function getTickets($queue)
+	public function getTickets($queue, $limit)
 	{
-		//define request
+		//soap call to get all new or open tickets of queue $queue
 		$soapMessage = Array();
 		$soapMessage[] = new SoapParam($this->soapUser, "UserLogin");
 		$soapMessage[] = new SoapParam($this->soapPassword, "Password");
 		$soapMessage[] = new SoapParam("ARRAY", "Result");
-		$soapMessage[] = new SoapParam(10, "Limit");
+		$soapMessage[] = new SoapParam($limit, "Limit");
+		$soapMessage[] = new SoapParam($queue, "Queues");
+		$soapMessage[] = new SoapParam("new", "States");
+		$soapMessage[] = new SoapParam("open", "States");
+		$soapMessage[] = new SoapParam("Down", "OrderBy");
+		$soapMessage[] = new SoapParam("Age", "SortBy");
+		//returns a single ticketId or an array of ticketIds, if multiple tickets were found
+		$tickets = $this->soapClient->__soapCall("TicketSearch", $soapMessage);
 
-		//soap call
-		$result = $this->soapClient->__soapCall("TicketSearch", $soapMessage);
-
-		return $result;
+		//check if ticket is array
+		if(is_array($tickets))
+		{
+			return $tickets['TicketID'];
+		}
+		elseif($tickets != null)
+		{
+			return array($tickets);
+		}
+		else
+		{
+			return array();
+		}
 	}
 
+	public function getTicketSummary($ticketId)
+	{
+		//soap call: get ticket
+		$soapMessage = Array();
+		$soapMessage[] = new SoapParam($this->soapUser, "UserLogin");
+		$soapMessage[] = new SoapParam($this->soapPassword, "Password");
+		$soapMessage[] = new SoapParam($ticketId, "TicketID");
+		$ticket = $this->soapClient->__soapCall("TicketGet", $soapMessage);
+
+		//generate output array
+		$output = Array();
+		$output['TicketNumber'] = $ticket->TicketNumber;
+		$output['Title'] = $ticket->Title;
+		$output['TicketID'] = $ticket->TicketID;
+		$output['Age'] = $ticket->Age;
+		return $output;
+	}
 }
 ?>

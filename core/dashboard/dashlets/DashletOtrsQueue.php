@@ -41,14 +41,54 @@ class DashletOtrsQueue extends Dashlet
 		//open connector
 		$connector = new ConnectorOtrs($soapUrl, $soapUser, $soapPassword);
 
-		$return = $connector->getTickets($queue);
+		//get ticketIDs
+		$tickets = $connector->getTickets($queue, $maxEntries);
 
-		//generate output
-		$output = htmlspecialchars(print_r($return, true));
+		//start output
+		$output = "<h1>$title</h1>";
+		$output .= "<table class=\"severity\">";
+
+		//output of ticket summary
+		foreach($tickets as $ticketId)
+		{
+			$ticket = $connector->getTicketSummary($ticketId);
+			
+			$output .= "<tr class=\"cleared\">";
+			$output .= "<td><a href=\"$linkUrlBase/index.pl?Action=AgentTicketZoom;TicketID={$ticket['TicketID']}\">{$ticket['TicketNumber']}</a></td>";
+			$output .= "<td>{$ticket['Title']}</td>";
+			$output .= "<td>(".$this->getAgeString($ticket['Age']).")</td>";
+			$output .= "</tr>";
+		}
+
+		//output if no tickets were found
+		if(count($tickets) <= 0)
+		{
+			$output .= "<tr class=\"cleared\"><td colspan=\"3\">no tickets in $queue.</td></tr>";
+		}
+
+		//output footer
+		$output .= "</table>";
 
 		//return output
 		return $output;
 	}
 
+	private function getAgeString($age)
+	{
+		$ageString = "$age sec";
+		if($age > 60)
+		{
+			$ageString = round($age / 60) . " min";
+		}
+		if($age > 3600)
+		{
+			$ageString = round($age / 3600) . " h";
+		}
+		if($age > 86400)
+		{
+			$ageString = round($age / 86400) . " d";
+		}
+		return $ageString;
+	}
 }
 ?>
