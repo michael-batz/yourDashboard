@@ -166,10 +166,10 @@ class DashletOpenNMSAlarms extends Dashlet
 				case "INDETERMINATE":
 					$outputSeverity = "warning";
 					break;
-				case "normal":
+				case "NORMAL":
 					$outputSeverity = "info";
 					break;
-				case "cleared":
+				case "CLEARED":
 					$outputSeverity = "cleared";
 					break;
 
