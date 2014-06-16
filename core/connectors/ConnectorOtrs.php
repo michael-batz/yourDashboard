@@ -36,19 +36,16 @@ class ConnectorOtrs
 	//password for the OTRS SOAP API
 	private $soapPassword;
 
-	//soap client
-	private $soapClient;
+	//soap options
+	private $soapOptions;
 
 	function __construct($soapUrl, $soapUser, $soapPassword)
 	{
 		$this->soapUrl = $soapUrl;
 		$this->soapUser = $soapUser;
 		$this->soapPassword = $soapPassword;
-
-		//create soapClient with user credentials
-		$soapOptions = Array(	"location" 	=> $soapUrl, 
-					"uri" 		=> "urn:otrs-com:soap:functions");
-		$this->soapClient = new SoapClient(null, $soapOptions);
+		$this->soapOptions = Array(	"location" 	=> $soapUrl, 
+						"uri" 		=> "urn:otrs-com:soap:functions");
 	}
 
 
@@ -61,6 +58,7 @@ class ConnectorOtrs
 	public function getTickets($queue, $limit)
 	{
 		//soap call to get all new or open tickets of queue $queue
+		$soapClient = new SoapClient(null, $this->soapOptions);
 		$soapMessage = Array();
 		$soapMessage[] = new SoapParam($this->soapUser, "UserLogin");
 		$soapMessage[] = new SoapParam($this->soapPassword, "Password");
@@ -69,10 +67,11 @@ class ConnectorOtrs
 		$soapMessage[] = new SoapParam($queue, "Queues");
 		$soapMessage[] = new SoapParam("new", "States");
 		$soapMessage[] = new SoapParam("open", "States");
+		$soapMessage[] = new SoapParam("unlock", "Locks");
 		$soapMessage[] = new SoapParam("Down", "OrderBy");
 		$soapMessage[] = new SoapParam("Age", "SortBy");
 		//returns a single ticketId or an array of ticketIds, if multiple tickets were found
-		$tickets = $this->soapClient->__soapCall("TicketSearch", $soapMessage);
+		$tickets = $soapClient->__soapCall("TicketSearch", $soapMessage);
 
 		//check if ticket is array
 		if(is_array($tickets))
@@ -92,11 +91,12 @@ class ConnectorOtrs
 	public function getTicketSummary($ticketId)
 	{
 		//soap call: get ticket
+		$soapClient = new SoapClient(null, $this->soapOptions);
 		$soapMessage = Array();
 		$soapMessage[] = new SoapParam($this->soapUser, "UserLogin");
 		$soapMessage[] = new SoapParam($this->soapPassword, "Password");
 		$soapMessage[] = new SoapParam($ticketId, "TicketID");
-		$ticket = $this->soapClient->__soapCall("TicketGet", $soapMessage);
+		$ticket = $soapClient->__soapCall("TicketGet", $soapMessage);
 
 		//generate output array
 		$output = Array();

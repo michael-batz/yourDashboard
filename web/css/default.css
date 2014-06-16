@@ -132,6 +132,7 @@ table.severity td
 	border-bottom:			1px solid;
 	border-top:			1px solid;
 	padding:			15px;
+	min-width:			50px;
 }
 
 table.severity td:first-child

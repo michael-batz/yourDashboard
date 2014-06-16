@@ -42,15 +42,20 @@ class DashletOtrsQueue extends Dashlet
 		$connector = new ConnectorOtrs($soapUrl, $soapUser, $soapPassword);
 
 		//get ticketIDs
-		$tickets = $connector->getTickets($queue, $maxEntries);
+		$tickets = $connector->getTickets($queue, $maxEntries + 1);
 
 		//start output
 		$output = "<h1>$title</h1>";
 		$output .= "<table class=\"severity\">";
 
 		//output of ticket summary
+		$i = 0;
 		foreach($tickets as $ticketId)
 		{
+			if($i >= $maxEntries)
+			{
+				break;
+			}
 			$ticket = $connector->getTicketSummary($ticketId);
 			
 			$output .= "<tr class=\"cleared\">";
@@ -58,6 +63,13 @@ class DashletOtrsQueue extends Dashlet
 			$output .= "<td>{$ticket['Title']}</td>";
 			$output .= "<td>(".$this->getAgeString($ticket['Age']).")</td>";
 			$output .= "</tr>";
+			$i++;
+		}
+
+		//output, if there are further tickets
+		if(count($tickets) > $maxEntries)
+		{
+			$output .= "<tr class=\"cleared\"><td colspan=\"3\">more tickets in $queue...</td></tr>";
 		}
 
 		//output if no tickets were found

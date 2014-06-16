@@ -137,7 +137,7 @@ class DashletOpenNMSOutages extends Dashlet
 		//if there are no outages
 		if(count($outagesRecord) <= 0)
 		{
-			$output .= "<tr class=\"cleared\"><td>no outages</td></tr>";
+			$output .= "<tr class=\"cleared\"><td colspan=\"2\">no outages</td></tr>";
 		}
 		foreach($outagesRecord as $outage)
 		{
@@ -169,15 +169,18 @@ class DashletOpenNMSOutages extends Dashlet
 			switch($outage["type"])
 			{
 				case "nodeDown":
-					$output .= "<tr class=\"major\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']} ($outageIntervalString)</a></td></tr>";
+					$output .= "<tr class=\"major\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']}</a></td>";
+					$output .= "<td>($outageIntervalString)</td></tr>";
 					break;
 
 				case "interfaceDown":
-					$output .= "<tr class=\"minor\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']} ($outageIntervalString)</a></td></tr>";
+					$output .= "<tr class=\"minor\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']}</a></td>";
+					$output .= "<td>($outageIntervalString)</td></tr>";
 					break;
 
 				case "nodeLostService":
-					$output .= "<tr class=\"warning\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']} ($outageIntervalString)</a></td></tr>";
+					$output .= "<tr class=\"warning\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']}</a></td>";
+					$output .= "<td>($outageIntervalString)</td></tr>";
 					break;
 			}
 			
@@ -189,7 +192,7 @@ class DashletOpenNMSOutages extends Dashlet
 		if($maxEntries != "" && count($outagesRecord) > $maxEntries)
 		{
 			$countMissing = count($outagesRecord) - $maxEntries;
-			$output .= "<tr class=\"major\"><td>$countMissing more nodes with outages...</td></tr>";
+			$output .= "<tr class=\"major\"><td colspan=\"2\">$countMissing more nodes with outages...</td></tr>";
 		}
 
 		$output  .= "</table>";
