@@ -43,7 +43,7 @@ class DashletOpenNMSAlarms extends Dashlet
 		$connector = new ConnectorOpenNMS($restUrl, $restUser, $restPassword);
 
 		//get current outages as SimpleXmlObject
-		$alarmsXml = simplexml_load_string($connector->getData("alarms?alarmAckUser=null&orderBy=lastEventTime&order=desc"));
+		$alarmsXml = simplexml_load_string($connector->getData("alarms?alarmAckUser=null&orderBy=lastEventTime&order=desc&limit=0"));
 		if($alarmsXml === FALSE)
 		{
 			throw new DashletException("Error connecting to OpenNMS");

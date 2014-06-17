@@ -14,7 +14,7 @@
 				<parameter key="restUrl" value="http://10.0.1.106:8980/opennms/rest" />
 				<parameter key="restUser" value="admin" />
 				<parameter key="restPassword" value="admin" />
-				<parameter key="outagesCategory" value="Ciisco" />
+				<parameter key="outagesCategory" value="Cisco" />
 				<parameter key="maxEntries" value="10" />
 			</dashlet>
 		</row>

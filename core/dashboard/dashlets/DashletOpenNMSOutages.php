@@ -42,7 +42,7 @@ class DashletOpenNMSOutages extends Dashlet
 		$connector = new ConnectorOpenNMS($restUrl, $restUser, $restPassword);
 
 		//get current outages as SimpleXmlObject
-		$outagesXml = simplexml_load_string($connector->getData("outages?ifRegainedService=null&orderBy=ifLostService&order=desc"));
+		$outagesXml = simplexml_load_string($connector->getData("outages?ifRegainedService=null&orderBy=ifLostService&order=desc&limit=0"));
 		if($outagesXml === FALSE)
 		{
 			throw new DashletException("Error connecting to OpenNMS");
