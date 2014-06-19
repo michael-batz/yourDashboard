@@ -33,6 +33,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<script src="js/jquery-1.11.1.min.js"></script>
 		<script src="js/functions.js"></script>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="css/default.css" />
 		<?php
 			foreach(getDashletCssFiles() as $cssFile)

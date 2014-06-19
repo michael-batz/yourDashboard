@@ -1,4 +1,3 @@
-<?php
 /********************************************************************
 * This file is part of yourDashboard.
 *
@@ -20,34 +19,16 @@
 *
 *********************************************************************/
 
+
 /**
-* error dashlet: shown when dashlet class not found
-* @author: Michael Batz <michael@yourcmdb.org>
+* CSS for error dashlet
 */
-class DashletError extends Dashlet
+img.DashletError-icon
 {
-
-	/**
-	* parameters:
-	* - message: error message
-	*/
-	public function getHtmlContentString()
-	{
-		$output = "<h1>Ooops: Dashlet Error</h1>";
-		if($this->parameter->getValue("message") != "")
-		{
-			$output .= "<img class=\"DashletError-icon\" src=\"img/icons/critical.png\" />";
-			$output .= "<div class=\"DashletError-text\"><p>";
-			$output .= "Sorry, there was an error loading the dashlet.";
-			$output .= "<br />";
-			$output .= "reason: ". $this->parameter->getValue("message");
-			$output .= "<br />";
-			$output .= "We will try to reload the dashlet in the configured interval...";
-			$output .= "</p>";
-			$output .= "</div>";
-		}
-		return $output;
-	}
-
+	float:			left;
 }
-?>
+
+div.DashletError-text
+{
+	margin-left:		70px;
+}
