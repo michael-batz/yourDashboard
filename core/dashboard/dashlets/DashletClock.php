@@ -39,7 +39,7 @@ class DashletClock extends Dashlet
 		//set default values
 		if($location == "")
 		{
-			$location = "London, UK";
+			$location = "";
 		}
 		if($clockFormatDate == "")
 		{
@@ -68,7 +68,66 @@ class DashletClock extends Dashlet
 		$output .= "<p class=\"clockdashlet-location\">$location</p>";
 		$output .= "<p class=\"clockdashlet-date\">". gmdate($clockFormatDate, $localTimestamp)  ."</p>";
 		$output .= "<p class=\"clockdashlet-time\">". gmdate($clockFormatTime, $localTimestamp)  ."</p>";
+		$output .= "<img src=\"data:image/svg+xml;base64," . base64_encode($this->generateSVGClock($localTimestamp)) . "\" />";
 		return $output;
+	}
+
+	private function generateSVGClock($localTimestamp)
+	{
+		//calculate position of hands
+		$minutes = gmdate('i', $localTimestamp);
+		$hours = gmdate('h', $localTimestamp);
+		$angleMinutes = ($minutes/60) * 360;
+		$angleHours = (($hours/12) * 360) + ($minutes/60) * 30;
+
+		//set image size
+		$width = 100;
+		$height = 100;
+
+		//generate SVG header
+		$svg = "";
+		$svg .= '<?xml version="1.0" encoding="UTF-8"?>';
+		$svg .= '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
+		$svg .= '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" ';
+		$svg .= 'version="1.1" baseProfile="full" width="'.$width.'px" height="'.$width.'px">';
+		$svg .= '<g transform="translate('. $width / 2 .', '. $height / 2 .') scale('. ($width/220) .', '. ($height/220) .')">';
+
+		//clock border
+		$svg .= '<circle cx="0" cy="0" r="100" fill="none" stroke="black" stroke-width="5"/>';
+
+		//definition of 5min block
+		$svg .= '<g id="5min">';
+		//hour mark
+		$svg .= '<line x1="0" y1="-85" x2="0" y2="-100" stroke="black" stroke-width="5" />';
+		//min mark
+		$svg .= '<line x1="0" y1="-90" x2="0" y2="-98" stroke="grey" stroke-width="3" transform="rotate(6,0,0)" />';
+		$svg .= '<line x1="0" y1="-90" x2="0" y2="-98" stroke="grey" stroke-width="3" transform="rotate(12,0,0)" />';
+		$svg .= '<line x1="0" y1="-90" x2="0" y2="-98" stroke="grey" stroke-width="3" transform="rotate(18,0,0)" />';
+		$svg .= '<line x1="0" y1="-90" x2="0" y2="-98" stroke="grey" stroke-width="3" transform="rotate(24,0,0)" />';
+		$svg .= '</g>';
+
+		//repition of 5min block
+		$svg .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#5min" transform="rotate(30,0,0)" />';
+		$svg .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#5min" transform="rotate(60,0,0)" />';
+		$svg .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#5min" transform="rotate(90,0,0)" />';
+		$svg .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#5min" transform="rotate(120,0,0)" />';
+		$svg .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#5min" transform="rotate(150,0,0)" />';
+		$svg .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#5min" transform="rotate(180,0,0)" />';
+		$svg .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#5min" transform="rotate(210,0,0)" />';
+		$svg .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#5min" transform="rotate(240,0,0)" />';
+		$svg .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#5min" transform="rotate(270,0,0)" />';
+		$svg .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#5min" transform="rotate(300,0,0)" />';
+		$svg .= '<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#5min" transform="rotate(330,0,0)" />';
+
+		//definition of hands
+		$svg .= '<line x1="0" y1="0" x2="0" y2="-50" stroke="red" stroke-width="5" transform="rotate('.$angleHours.',0,0)"/>';
+		$svg .= '<line x1="0" y1="0" x2="0" y2="-80" stroke="black" stroke-width="5" transform="rotate('.$angleMinutes.',0,0)"/>';
+
+		//SVG footer
+		$svg .= '</g>';
+		$svg .= '</svg>';
+
+		return $svg;
 	}
 
 }
