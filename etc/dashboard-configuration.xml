@@ -8,7 +8,6 @@
 				<parameter key="restPassword" value="admin" />
 				<parameter key="linkUrlBase" value="http://10.0.1.106:8980/opennms" />
 				<parameter key="maxEntries" value="10" />
-				<parameter key="displayUpdateString" value="false" />
 			</dashlet>
 			<dashlet class="DashletOpenNMSOutages" refresh="30000">
 				<parameter key="title" value="OpenNMS Outages in category Cisco" />
@@ -41,29 +40,25 @@
 			</dashlet>
 		</row>
 	</dashboard>
-	<dashboard name="test1">
+	<dashboard name="clocks">
 		<row>
-			<dashlet class="DashletDummy" refresh="10000">
-				<parameter key="title" value="Example Dashlet 3" />
-				<parameter key="text" value="Testtext3" />
+			<dashlet class="DashletClock" refresh="10000">
+				<parameter key="location" value="Berlin, DE" />
+				<parameter key="clockDiffUTC" value="+1" />
+				<parameter key="clockSummertime" value="true" />
+				<parameter key="displayUpdateString" value="false" />
 			</dashlet>
-			<dashlet class="DashletDummy" refresh="5000">
-				<parameter key="title" value="Example Dashlet 4" />
-				<parameter key="text" value="Testtext4" />
+			<dashlet class="DashletClock" refresh="10000">
+				<parameter key="location" value="London, UK" />
+				<parameter key="clockDiffUTC" value="+0" />
+				<parameter key="clockSummertime" value="true" />
+				<parameter key="displayUpdateString" value="false" />
 			</dashlet>
-			<dashlet class="DashletDummy" refresh="5000">
-				<parameter key="title" value="Example Dashlet 4" />
-				<parameter key="text" value="Testtext4" />
-			</dashlet>
-		</row>
-		<row>
-			<dashlet class="DashletDummy" refresh="30000">
-				<parameter key="title" value="Example Dashlet 1" />
-				<parameter key="text" value="Testtext1" />
-			</dashlet>
-			<dashlet class="DashletDummy" refresh="10000">
-				<parameter key="title" value="Example Dashlet 2" />
-				<parameter key="text" value="Testtext2" />
+			<dashlet class="DashletClock" refresh="10000">
+				<parameter key="location" value="New York, USA/NY" />
+				<parameter key="clockDiffUTC" value="-5" />
+				<parameter key="clockSummertime" value="true" />
+				<parameter key="displayUpdateString" value="false" />
 			</dashlet>
 		</row>
 	</dashboard>
