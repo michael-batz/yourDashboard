@@ -60,7 +60,9 @@ function loadDashlet($dashboard, $dashletRow, $dashletId)
 {
 	try
 	{
+		//print dashlet content
 		echo $dashboard->getDashlet($dashletRow, $dashletId)->getHtmlContentString();
+		echo $dashboard->getDashlet($dashletRow, $dashletId)->getHtmlLastUpdateString();
 	}
 	catch(Exception $e)
 	{

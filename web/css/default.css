@@ -114,6 +114,15 @@ div.dashlet h1
 	text-align:		center;
 }
 
+div.updatestring
+{
+	text-align:		right;
+	color:			#999999;
+	font-size:		9pt;
+	font-style:		italic;
+}
+
+
 /**
 * severity tables
 */

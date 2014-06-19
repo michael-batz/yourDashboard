@@ -48,6 +48,23 @@ abstract class Dashlet
 		return $this->refresh;
 	}
 
+
+	/**
+	* return HTML last updated output string
+	*/
+	public function getHtmlLastUpdateString()
+	{
+		$displayUpdateString = $this->parameter->getValue("displayUpdateString");
+		$output = "";
+		if($displayUpdateString != "false")
+		{
+			$output .= "<div class=\"updatestring\">Last Update: ";
+			$output .= date("d.m.Y - H:i");
+			$output .= "</div>";
+		}
+		return $output;
+	}
+
 	/**
 	* return HTML output of dashlet
 	*/
