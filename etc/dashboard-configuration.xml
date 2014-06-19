@@ -1,6 +1,21 @@
 <dashboard-configuration>
 	<dashboard name="default">
 		<row>
+			<dashlet class="DashletClock" refresh="10000">
+				<parameter key="location" value="Berlin, DE" />
+				<parameter key="clockDiffUTC" value="+1" />
+				<parameter key="clockSummertime" value="true" />
+				<parameter key="displayUpdateString" value="false" />
+			</dashlet>
+			<dashlet class="DashletClock" refresh="10000">
+				<parameter key="location" value="London, UK" />
+				<parameter key="clockDiffUTC" value="+0" />
+				<parameter key="clockSummertime" value="true" />
+				<parameter key="displayUpdateString" value="false" />
+			</dashlet>
+		</row>
+
+		<row>
 			<dashlet class="DashletOpenNMSOutages" refresh="30000">
 				<parameter key="title" value="OpenNMS Outages" />
 				<parameter key="restUrl" value="http://10.0.1.106:8980/opennms/rest" />

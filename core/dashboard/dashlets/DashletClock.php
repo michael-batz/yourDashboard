@@ -65,10 +65,14 @@ class DashletClock extends Dashlet
 
 		//generate output
 		$output = "";
-		$output .= "<p class=\"clockdashlet-location\">$location</p>";
-		$output .= "<p class=\"clockdashlet-date\">". gmdate($clockFormatDate, $localTimestamp)  ."</p>";
-		$output .= "<p class=\"clockdashlet-time\">". gmdate($clockFormatTime, $localTimestamp)  ."</p>";
-		$output .= "<img src=\"data:image/svg+xml;base64," . base64_encode($this->generateSVGClock($localTimestamp)) . "\" />";
+		$output .= "<img class=\"DashletClock-clock\" src=\"data:image/svg+xml;base64," . base64_encode($this->generateSVGClock($localTimestamp)) . "\" />";
+		$output .= "<div class=\"DashletClock-timestring\">";
+		$output .= "<p class=\"DashletClock-location\">$location</p>";
+		$output .= "<p>";
+		$output .= gmdate($clockFormatDate, $localTimestamp);
+		$output .= "<br />";
+		$output .= gmdate($clockFormatTime, $localTimestamp);
+		$output .= "</p>";
 		return $output;
 	}
 

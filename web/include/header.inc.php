@@ -30,10 +30,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 	<head>
 		<title>yourDashboard</title>
-		<link rel="stylesheet" type="text/css" href="css/default.css" />
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<script src="js/jquery-1.11.1.min.js"></script>
 		<script src="js/functions.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/default.css" />
+		<?php
+			foreach(getDashletCssFiles() as $cssFile)
+			{
+				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/dashlets/$cssFile\" />";
+			}
+		?>
 	</head>
 	<body>
 		<?php

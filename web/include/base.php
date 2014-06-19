@@ -74,4 +74,28 @@ function getHttpPostVar($variableName, $defaultValue)
 		return $defaultValue;
 	}
 }
+
+function getDashletCssFiles()
+{
+	$scriptBaseDir = dirname(__FILE__);
+	$cssBaseDir = realpath("$scriptBaseDir/../../web/css/dashlets");
+	$cssFiles = Array();
+
+	//get all css files of directory
+	$dirhandle = dir($cssBaseDir);
+	if($dirhandle !== FALSE)
+	{
+		while($entry = $dirhandle->read())
+		{
+			if(preg_match('#.*\.css$#', $entry) === 1)
+			{
+				$cssFiles[] = $entry;
+			}
+		}
+		$dirhandle->close();
+	}
+
+	//return cssFiles
+	return $cssFiles;
+}
 ?>
