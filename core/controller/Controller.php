@@ -30,12 +30,15 @@ class Controller
 	//configuration object
 	private $config;
 
+	//yourdashboard version
+
 	/**
 	* Creates a dashboard
 	*/
 	function __construct()
 	{
 		$this->config = new Config();
+		$this->version = "0.1-dev";
 	}
 
 	/**
@@ -53,5 +56,14 @@ class Controller
 	{
 		return $this->config->getDashboardConfig()->getDashboard($name);
 	}
+
+	/**
+	* get version
+	*/
+	public function getVersion()
+	{
+		return $this->version;
+	}
+
 }
 ?>
