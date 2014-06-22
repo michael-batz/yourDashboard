@@ -73,6 +73,7 @@ class DashletClock extends Dashlet
 		$output .= "<br />";
 		$output .= gmdate($clockFormatTime, $localTimestamp);
 		$output .= "</p>";
+		$output .= "</div>";
 		return $output;
 	}
 

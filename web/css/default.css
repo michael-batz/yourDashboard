@@ -83,6 +83,7 @@ div.dashletRow
 div.dashlet
 {
 	display:		table-cell;
+	vertical-align: 	top;
 
 	border-style:		solid;
 	border-color:		#CCCCCC;
