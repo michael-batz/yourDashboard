@@ -61,7 +61,7 @@ class Dashboard
 				echo "<div class=\"dashlet\" id=\"dashlet-$j-$i\">\n";
 				echo "<img src=\"img/icons/waiting.gif\" alt=\"loading...\" class=\"progressbar\" />\n";
 				echo "<p class=\"progressbar\">Loading dashlet, please wait...</p>";
-				echo "<script language=\"JavaScript\">startDashletLoader('$this->name', $j, $i, $refreshInterval)</script>\n";
+				echo "<script type=\"text/javascript\">startDashletLoader('$this->name', $j, $i, $refreshInterval)</script>\n";
 				echo "</div>\n\n";
 			}
 			echo "</div>\n";
