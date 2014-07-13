@@ -38,7 +38,7 @@ class Controller
 	function __construct()
 	{
 		$this->config = new Config();
-		$this->version = "0.1-dev";
+		$this->version = "0.2-dev";
 	}
 
 	/**
