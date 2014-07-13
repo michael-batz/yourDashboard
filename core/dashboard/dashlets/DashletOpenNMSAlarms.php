@@ -38,6 +38,7 @@ class DashletOpenNMSAlarms extends Dashlet
 		$ueiFilter = $this->parameter->getValue("ueiFilter");
 		$maxEntries = $this->parameter->getValue("maxEntries");
 		$linkUrlBase = $this->parameter->getValue("linkUrlBase");
+		$paramShowLogmessage = $this->parameter->getValue("showLogmessage");
 		
 		//open connector
 		$connector = new ConnectorOpenNMS($restUrl, $restUser, $restPassword);
@@ -179,7 +180,10 @@ class DashletOpenNMSAlarms extends Dashlet
 			$output .= "<tr class=\"$outputSeverity\">";
 			$output .= "<td><a href=\"$linkUrlBase/alarm/detail.htm?id={$alarm['id']}\" target=\"_blank\">{$alarm['id']}</a></td>";
 			$output .= "<td>{$alarm['nodelabel']}</td>";
-			$output .= "<td>{$alarm['log']}</td>";
+			if($paramShowLogmessage != "false")
+			{
+				$output .= "<td>{$alarm['log']}</td>";
+			}
 			$output .= "<td>($alarmIntervalString)</td>";
 			$output .= "</tr>";
 			
