@@ -22,6 +22,12 @@
 
 /**
 * Parameter for dashlet
+* Each parameter is a key - value pair
+* For each key, a value array is stored
+* Usage:
+* - getValueArray() 	=> returns the value array
+* - getValue() 		=> returns the first value of the value array
+* - addEntry		=> creates a new entry for key
 * @author: Michael Batz <michael@yourcmdb.org>
 */
 class DashletParameter
@@ -42,19 +48,32 @@ class DashletParameter
 
 	public function getValue($key)
 	{
-		if(isset($this->parameter[$key]))
+		if(isset($this->parameter[$key][0]))
 		{
-			return $this->parameter[$key];
+			return $this->parameter[$key][0];
 		}
 		else
 		{
 			return "";
 		}
 	}
+
+	public function getValueArray($key)
+	{
+		if(isset($this->parameter[$key]))
+                {
+                        return $this->parameter[$key];
+                }
+                else
+                {
+                        return Array();
+                }
+
+	}
 	
 	public function addEntry($key, $value)
 	{
-		$this->parameter[$key] = $value;
+		$this->parameter[$key][] = $value;
 	}
 
 }
