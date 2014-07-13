@@ -76,13 +76,13 @@ class DashletOtrsQueue extends Dashlet
 		//output, if there are further tickets
 		if(count($tickets) > $maxEntries)
 		{
-			$output .= "<tr class=\"cleared\"><td colspan=\"3\">more tickets in $queue...</td></tr>";
+			$output .= "<tr class=\"cleared\"><td colspan=\"3\">more tickets in configured queues...</td></tr>";
 		}
 
 		//output if no tickets were found
 		if(count($tickets) <= 0)
 		{
-			$output .= "<tr class=\"cleared\"><td colspan=\"3\">no tickets in $queue.</td></tr>";
+			$output .= "<tr class=\"cleared\"><td colspan=\"3\">no tickets in configured queues.</td></tr>";
 		}
 
 		//output footer
