@@ -40,7 +40,6 @@
 				<parameter key="restUrl" value="http://10.0.1.106:8980/opennms/rest" />
 				<parameter key="restUser" value="admin" />
 				<parameter key="restPassword" value="admin" />
-				<parameter key="alarmsCategory" value="" />
 				<parameter key="ueiFilter" value="" />
 				<parameter key="linkUrlBase" value="http://10.0.1.106:8980/opennms" />
 				<parameter key="maxEntries" value="10" />
