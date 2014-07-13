@@ -169,17 +169,17 @@ class DashletOpenNMSOutages extends Dashlet
 			switch($outage["type"])
 			{
 				case "nodeDown":
-					$output .= "<tr class=\"major\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']}</a></td>";
+					$output .= "<tr class=\"major\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\" target=\"_blank\">{$outage['nodelabel']}</a></td>";
 					$output .= "<td>($outageIntervalString)</td></tr>";
 					break;
 
 				case "interfaceDown":
-					$output .= "<tr class=\"minor\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']}</a></td>";
+					$output .= "<tr class=\"minor\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\" target=\"_blank\">{$outage['nodelabel']}</a></td>";
 					$output .= "<td>($outageIntervalString)</td></tr>";
 					break;
 
 				case "nodeLostService":
-					$output .= "<tr class=\"warning\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\">{$outage['nodelabel']}</a></td>";
+					$output .= "<tr class=\"warning\"><td><a href=\"$linkUrlBase/element/nodeList.htm?nodename={$outage['nodelabel']}\" target=\"_blank\">{$outage['nodelabel']}</a></td>";
 					$output .= "<td>($outageIntervalString)</td></tr>";
 					break;
 			}

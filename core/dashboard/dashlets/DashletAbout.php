@@ -42,7 +42,7 @@ class DashletAbout extends Dashlet
 		$output .= "<br />";
 		$output .= "yourDasboard is free software. Your can redistribute/modify/use it under the terms of GPLv3";
 		$output .= "<br />";
-		$output .= "For more information, please see <a href=\"http://www.yourdashboard.org\">http://www.yourdashboard.org</a>";
+		$output .= "For more information, please see <a href=\"http://www.yourdashboard.org\" target=\"_blank\">http://www.yourdashboard.org</a>";
 		$output .= "</p>";
 		$output .= "</div>";
 		return $output;

@@ -59,7 +59,7 @@ class DashletOtrsQueue extends Dashlet
 			$ticket = $connector->getTicketSummary($ticketId);
 			
 			$output .= "<tr class=\"cleared\">";
-			$output .= "<td><a href=\"$linkUrlBase/index.pl?Action=AgentTicketZoom;TicketID={$ticket['TicketID']}\">{$ticket['TicketNumber']}</a></td>";
+			$output .= "<td><a href=\"$linkUrlBase/index.pl?Action=AgentTicketZoom;TicketID={$ticket['TicketID']}\" target=\"_blank\">{$ticket['TicketNumber']}</a></td>";
 			$output .= "<td>{$ticket['Title']}</td>";
 			$output .= "<td>(".$this->getAgeString($ticket['Age']).")</td>";
 			$output .= "</tr>";
