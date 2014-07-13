@@ -50,7 +50,6 @@
 				<parameter key="soapUser" value="yourdashboard" />
 				<parameter key="soapPassword" value="yourdashboard" />
 				<parameter key="linkUrlBase" value="http://10.0.1.106/otrs" />
-				<parameter key="queue" value="Raw" />
 				<parameter key="queue" value="Eingang" />
 				<parameter key="maxEntries" value="10" />
 			</dashlet>
