@@ -39,6 +39,7 @@ class DashletOpenNMSAlarms extends Dashlet
 		$maxEntries = $this->parameter->getValue("maxEntries");
 		$linkUrlBase = $this->parameter->getValue("linkUrlBase");
 		$paramShowLogmessage = $this->parameter->getValue("showLogmessage");
+		$paramMinSeverity = $this->parameter->getValue("minSeverity");
 		
 		//open connector
 		$connector = new ConnectorOpenNMS($restUrl, $restUser, $restPassword);
@@ -48,6 +49,41 @@ class DashletOpenNMSAlarms extends Dashlet
 		if($alarmsXml === FALSE)
 		{
 			throw new DashletException("Error connecting to OpenNMS");
+		}
+
+		//if minSeverity is defined, get all allowed severities
+		if($paramMinSeverity != "")
+		{
+			$severityFilter = Array();
+			switch($paramMinSeverity)
+			{
+				case "CLEARED":
+					$severityFilter = Array("CLEARED", "NORMAL", "INDETERMINATE", "WARNING", "MINOR", "MAJOR", "CRITICAL");
+					break;
+				case "NORMAL":
+					$severityFilter = Array("NORMAL", "INDETERMINATE", "WARNING", "MINOR", "MAJOR", "CRITICAL");
+					break;
+				case "INDETERMINATE":
+					$severityFilter = Array("INDETERMINATE", "WARNING", "MINOR", "MAJOR", "CRITICAL");
+					break;
+				case "WARNING":
+					$severityFilter = Array("WARNING", "MINOR", "MAJOR", "CRITICAL");
+					break;
+				case "MINOR":
+					$severityFilter = Array("MINOR", "MAJOR", "CRITICAL");
+					break;
+				case "MAJOR":
+					$severityFilter = Array("MAJOR", "CRITICAL");
+					break;
+				case "CRITICAL":
+					$severityFilter = Array("CRITICAL");
+					break;
+				default:
+					$errorMessage = "Configuration Error: none of the allowed strings for parameter minSeverity set.";
+					$errorMessage.= "(allowed strings are 'CLEARED', 'NORMAL', 'INDETERMINATE', 'WARNING', 'MINOR', 'MAJOR', 'CRITICAL')";
+					throw new DashletException($errorMessage);
+					break;
+			}
 		}
 
 		//if category is defined, get all nodes of category
@@ -104,6 +140,12 @@ class DashletOpenNMSAlarms extends Dashlet
 
 			//if nodeFilter is defined and node is not in filter -> go to the next alarm
 			if(isset($nodeFilter) && array_search($alarmNodeId, $nodeFilter) === FALSE)
+			{
+				continue;
+			}
+
+			//if severityFilter is defined and alarm severity is not in filter -> go to the next alarm
+			if(isset($severityFilter) && array_search($alarmSeverity, $severityFilter) === FALSE)
 			{
 				continue;
 			}
