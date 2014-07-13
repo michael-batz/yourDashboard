@@ -34,15 +34,22 @@ class DashletOtrsQueue extends Dashlet
 		$soapUrl = $this->parameter->getValue("soapUrl");
 		$soapUser = $this->parameter->getValue("soapUser");
 		$soapPassword = $this->parameter->getValue("soapPassword");
-		$queue = $this->parameter->getValue("queue");
+		$queue = $this->parameter->getValueArray("queue");
+		$ticketStates = $this->parameter->getValueArray("ticketState");
 		$maxEntries = $this->parameter->getValue("maxEntries");
 		$linkUrlBase = $this->parameter->getValue("linkUrlBase");
 		
 		//open connector
 		$connector = new ConnectorOtrs($soapUrl, $soapUser, $soapPassword);
 
+		//set default value for ticketState
+		if(count($ticketStates) == 0)
+		{
+			$ticketStates = Array("new", "open");
+		}
+
 		//get ticketIDs
-		$tickets = $connector->getTickets($queue, $maxEntries + 1);
+		$tickets = $connector->getTickets($queue, $ticketStates, $maxEntries + 1);
 
 		//start output
 		$output = "<h1>$title</h1>";

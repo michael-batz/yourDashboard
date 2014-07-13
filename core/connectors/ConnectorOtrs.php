@@ -51,11 +51,12 @@ class ConnectorOtrs
 
 	/**
 	* Gets tickets from OTRS
-	* @param $queue name of the queue to get tickets
+	* @param $queues array of queues to get tickets
+	* @param $states array of ticket states to search
 	* @param $limit max count of output entries
 	* @return array with ticketIDs
 	*/
-	public function getTickets($queue, $limit)
+	public function getTickets($queues, $states, $limit)
 	{
 		//soap call to get all new or open tickets of queue $queue
 		$soapClient = new SoapClient(null, $this->soapOptions);
@@ -64,9 +65,14 @@ class ConnectorOtrs
 		$soapMessage[] = new SoapParam($this->soapPassword, "Password");
 		$soapMessage[] = new SoapParam("ARRAY", "Result");
 		$soapMessage[] = new SoapParam($limit, "Limit");
-		$soapMessage[] = new SoapParam($queue, "Queues");
-		$soapMessage[] = new SoapParam("new", "States");
-		$soapMessage[] = new SoapParam("open", "States");
+		foreach($queues as $queue)
+		{
+			$soapMessage[] = new SoapParam($queue, "Queues");
+		}
+		foreach($states as $state)
+		{
+			$soapMessage[] = new SoapParam($state, "States");
+		}
 		$soapMessage[] = new SoapParam("unlock", "Locks");
 		$soapMessage[] = new SoapParam("Down", "OrderBy");
 		$soapMessage[] = new SoapParam("Age", "SortBy");
