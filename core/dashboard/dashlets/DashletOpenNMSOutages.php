@@ -34,7 +34,7 @@ class DashletOpenNMSOutages extends Dashlet
 		$restUrl = $this->parameter->getValue("restUrl");
 		$restUser = $this->parameter->getValue("restUser");
 		$restPassword = $this->parameter->getValue("restPassword");
-		$outagesCategory = $this->parameter->getValue("outagesCategory");
+		$outagesCategory = $this->parameter->getValueArray("outagesCategory");
 		$maxEntries = $this->parameter->getValue("maxEntries");
 		$linkUrlBase = $this->parameter->getValue("linkUrlBase");
 		
@@ -49,7 +49,7 @@ class DashletOpenNMSOutages extends Dashlet
 		}
 
 		//if outagesCategory is defined, get all nodes of category
-		if($outagesCategory != "")
+		if(count($outagesCategory) > 0)
 		{
 			//get all nodes
 			$nodeFilter = Array();
@@ -66,11 +66,12 @@ class DashletOpenNMSOutages extends Dashlet
 				{
 					//if node is in category defined in $outagesCategory
 					$nodeCategoryName = (string) $category["name"];
-					if($nodeCategoryName == $outagesCategory)
+					if(array_search($nodeCategoryName, $outagesCategory) !== FALSE)
 					{
 						//add node to filter
 						$nodeId = (string)$node["id"];
 						$nodeFilter[] = $nodeId;
+						continue 2;
 					}
 				}
 			}

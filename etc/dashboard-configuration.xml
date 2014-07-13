@@ -25,11 +25,12 @@
 				<parameter key="maxEntries" value="10" />
 			</dashlet>
 			<dashlet class="DashletOpenNMSOutages" refresh="30000">
-				<parameter key="title" value="OpenNMS Outages in category Cisco" />
+				<parameter key="title" value="OpenNMS Outages in category router or switch" />
 				<parameter key="restUrl" value="http://10.0.1.106:8980/opennms/rest" />
 				<parameter key="restUser" value="admin" />
 				<parameter key="restPassword" value="admin" />
-				<parameter key="outagesCategory" value="Cisco" />
+				<parameter key="outagesCategory" value="router" />
+				<parameter key="outagesCategory" value="switch" />
 				<parameter key="maxEntries" value="10" />
 			</dashlet>
 		</row>
