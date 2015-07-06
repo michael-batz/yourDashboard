@@ -18,39 +18,19 @@
 		<row>
 			<dashlet class="DashletOpenNMSOutages" refresh="30000">
 				<parameter key="title" value="OpenNMS Outages" />
-				<parameter key="restUrl" value="http://10.0.1.106:8980/opennms/rest" />
-				<parameter key="restUser" value="admin" />
-				<parameter key="restPassword" value="admin" />
-				<parameter key="linkUrlBase" value="http://10.0.1.106:8980/opennms" />
+				<parameter key="restUrl" value="http://demo.opennms.org/opennms/rest" />
+				<parameter key="restUser" value="demo" />
+				<parameter key="restPassword" value="demo" />
+				<parameter key="linkUrlBase" value="http://demo.opennms.org/opennms" />
 				<parameter key="maxEntries" value="10" />
 			</dashlet>
 			<dashlet class="DashletOpenNMSOutages" refresh="30000">
 				<parameter key="title" value="OpenNMS Outages in category router or switch" />
-				<parameter key="restUrl" value="http://10.0.1.106:8980/opennms/rest" />
-				<parameter key="restUser" value="admin" />
-				<parameter key="restPassword" value="admin" />
+				<parameter key="restUrl" value="http://demo.opennms.org/opennms/rest" />
+				<parameter key="restUser" value="demo" />
+				<parameter key="restPassword" value="demo" />
 				<parameter key="outagesCategory" value="router" />
 				<parameter key="outagesCategory" value="switch" />
-				<parameter key="maxEntries" value="10" />
-			</dashlet>
-		</row>
-		<row>
-			<dashlet class="DashletOpenNMSAlarms" refresh="30000">
-				<parameter key="title" value="OpenNMS Alarms" />
-				<parameter key="restUrl" value="http://10.0.1.106:8980/opennms/rest" />
-				<parameter key="restUser" value="admin" />
-				<parameter key="restPassword" value="admin" />
-				<parameter key="ueiFilter" value="" />
-				<parameter key="linkUrlBase" value="http://10.0.1.106:8980/opennms" />
-				<parameter key="maxEntries" value="10" />
-			</dashlet>
-			<dashlet class="DashletOtrsQueue" refresh="30000">
-				<parameter key="title" value="OTRS Tickets in Eingang" />
-				<parameter key="soapUrl" value="http://10.0.1.106/otrs/nph-genericinterface.pl/WebserviceID/1" />
-				<parameter key="soapUser" value="yourdashboard" />
-				<parameter key="soapPassword" value="yourdashboard" />
-				<parameter key="linkUrlBase" value="http://10.0.1.106/otrs" />
-				<parameter key="queue" value="Eingang" />
 				<parameter key="maxEntries" value="10" />
 			</dashlet>
 		</row>
