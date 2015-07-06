@@ -32,6 +32,9 @@ class Config
 	//customizing configuration object
 	private $configCustomizing;
 
+	//alarming configuration object
+	private $configAlarm;
+
 	/**
 	* Creates a configuration object
 	*/
@@ -40,6 +43,7 @@ class Config
 		$configurationBase = realpath(dirname(__FILE__)."/../../etc");
 		$this->configDashboard = new DashboardConfig("$configurationBase/dashboard-configuration.xml");
 		$this->configCustomizing = new CustomizingConfig("$configurationBase/customizing-configuration.xml");
+		$this->configAlarm = new AlarmConfig("$configurationBase/alarm-configuration.xml");
 	}
 
 
@@ -57,6 +61,14 @@ class Config
 	public function getCustomizingConfig()
 	{
 		return $this->configCustomizing;
+	}
+
+	/**
+	* Return alarm configuration
+	*/
+	public function getAlarmConfig()
+	{
+		return $this->configAlarm;
 	}
 
 }

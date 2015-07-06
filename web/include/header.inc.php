@@ -44,6 +44,14 @@
 	</head>
 	<body>
 		<?php
+			//alarm handling
+			if($alarmConfig->isEnabled())
+			{
+				$alarmSoundfile =  $alarmConfig->getSoundfile();
+				echo "<audio id=\"dashboard-AlarmAudio\" src=\"$alarmSoundfile\" preload=\"auto\"></audio>";
+			}
+			
+			//show header
 			if($customizingConfig->getShowHeader())
 			{?>
 				<div class="header">
@@ -54,6 +62,8 @@
 				</div>
 			<?php
 			}
+
+			//show dashboard selector
 			if($customizingConfig->getShowSelector())
 			{?>
 				<div class="dashboardSelector">

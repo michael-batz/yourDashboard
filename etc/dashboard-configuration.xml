@@ -23,6 +23,7 @@
 				<parameter key="restPassword" value="demo" />
 				<parameter key="linkUrlBase" value="http://demo.opennms.org/opennms" />
 				<parameter key="maxEntries" value="10" />
+				<parameter key="createAlarms" value="false" />
 			</dashlet>
 			<dashlet class="DashletOpenNMSOutages" refresh="30000">
 				<parameter key="title" value="OpenNMS Outages in category router or switch" />

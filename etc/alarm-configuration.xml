@@ -1,0 +1,4 @@
+<alarm-configuration>
+	<enabled>1</enabled>
+	<soundfile>audio/alarm.wav</soundfile>
+</alarm-configuration>

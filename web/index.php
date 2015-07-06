@@ -44,6 +44,7 @@ catch(Exception $e)
 }
 $dashboardConfig = $controller->getConfig()->getDashboardConfig();
 $customizingConfig = $controller->getConfig()->getCustomizingConfig();
+$alarmConfig = $controller->getConfig()->getAlarmConfig();
 
 //render dashboard
 require("include/header.inc.php");

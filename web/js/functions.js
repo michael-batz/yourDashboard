@@ -45,3 +45,18 @@ function startDashletLoader(dashboardname, dashletRow, dashletid, interval)
 		window.setInterval(function() {loadDashlet(dashboardname, dashletRow, dashletid)}, interval);
 	});
 };
+
+/**
+* adds an alarm with given ID to alarm store
+*/
+function addAlarm(id)
+{
+	//check if alarm already is in store
+	var alarms = document.cookie;
+	if(alarms.indexOf(id + "=") < 0)
+	{
+		//if not: set cookie and play alarm sound
+		document.cookie = id + "=true";
+		document.getElementById('dashboard-AlarmAudio').play();
+	}
+}

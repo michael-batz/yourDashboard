@@ -40,6 +40,7 @@ class DashletOpenNMSAlarms extends Dashlet
 		$linkUrlBase = $this->parameter->getValue("linkUrlBase");
 		$paramShowLogmessage = $this->parameter->getValue("showLogmessage");
 		$paramMinSeverity = $this->parameter->getValue("minSeverity");
+		$createAlarms = $this->parameter->getValue("createAlarms");
 		
 		//open connector
 		$connector = new ConnectorOpenNMS($restUrl, $restUser, $restPassword);
@@ -175,6 +176,12 @@ class DashletOpenNMSAlarms extends Dashlet
 
 			//calculate outage interval
 			$alarmInterval = time() - $alarm["timestamp"];
+
+			//create alarm if configured for every alarm in the last 300sec
+			if($createAlarms == "true" && $alarmInterval < 300 )
+			{
+				echo "<script type=\"text/javascript\">addAlarm('onmsalarm-".$alarm["id"]."');</script>";
+			}
 
 			//define outageIntervalString
 			$alarmIntervalString = "$alarmInterval sec";

@@ -21,49 +21,46 @@
 *********************************************************************/
 
 /**
-* controller of yourDashboard
+* alarm configuration - reads xml configuration and provides configuration
+* about alarming options of dashboard content
 * @author: Michael Batz <michael@yourcmdb.org>
 */
-class Controller
+class AlarmConfig
 {
 
-	//configuration object
-	private $config;
+	//alarming enabled
+	private $enabled;
 
-	//yourdashboard version
+	//soundfile
+	private $soundfile;
 
 	/**
-	* Creates a dashboard
+	* Creates an alarming configuration object
 	*/
-	function __construct()
+	function __construct($xmlfilename)
 	{
-		$this->config = new Config();
-		$this->version = "0.3-dev";
+		//read xml file and generate objects
+		$xmlobject = simplexml_load_file($xmlfilename);
+
+		$this->enabled= (string)$xmlobject->enabled[0];
+		$this->soundfile = (string)$xmlobject->soundfile[0];
+	}
+
+
+	/**
+	* return if dashboard is enabled
+	*/
+	public function isEnabled()
+	{
+		return $this->enabled;
 	}
 
 	/**
-	* get configuration object
+	* return soundfile
 	*/
-	public function getConfig()
+	public function getSoundfile()
 	{
-		return $this->config;
+		return $this->soundfile;
 	}
-
-	/**
-	* returns the dashboard object for the given dashboard name
-	*/
-	public function getDashboardObject($name = "default")
-	{
-		return $this->config->getDashboardConfig()->getDashboard($name);
-	}
-
-	/**
-	* get version
-	*/
-	public function getVersion()
-	{
-		return $this->version;
-	}
-
 }
 ?>
