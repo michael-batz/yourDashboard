@@ -38,6 +38,18 @@ class DashletOpenNMSOutages extends Dashlet
 		$maxEntries = $this->parameter->getValue("maxEntries");
 		$linkUrlBase = $this->parameter->getValue("linkUrlBase");
 		$createAlarms = $this->parameter->getValue("createAlarms");
+		$alarmMinTime = $this->parameter->getValue("alarmMinTime");
+		$alarmMaxTime = $this->parameter->getValue("alarmMaxTime");
+
+		//set default values
+		if($alarmMinTime == "")
+		{
+			$alarmMinTime = 0;
+		}
+		if($alarmMaxTime == "")
+		{
+			$alarmMaxTime = 300;
+		}
 		
 		//open connector
 		$connector = new ConnectorOpenNMS($restUrl, $restUser, $restPassword);
@@ -152,8 +164,8 @@ class DashletOpenNMSOutages extends Dashlet
 			//calculate outage interval
 			$outageInterval = time() - $outage["timestamp"];
 
-			//create alarm if configured for every outage in the last 300sec
-			if($createAlarms == "true" && $outageInterval < 300 )
+			//create alarm if configured for every outage in the given interval
+			if($createAlarms == "true" && $outageInterval >= $alarmMinTime && $outageInterval <= $alarmMaxTime )
 			{
 				echo "<script type=\"text/javascript\">addAlarm('outage-".$outage["id"]."');</script>";
 			}
