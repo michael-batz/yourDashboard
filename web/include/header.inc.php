@@ -25,24 +25,38 @@
 * @author: Michael Batz <michael@yourcmdb.org>
 */
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<title>yourDashboard</title>
+		<!-- bootstrap setup -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-		<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
-		<script src="js/functions.js" type="text/javascript"></script>
+
+		<!-- favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-		<link rel="stylesheet" type="text/css" href="css/default.css" />
+
+		<!-- CSS: bootstrap, typeahead, smartmenues, bootstrap-datepicker and yourCMDB custom -->
+		<link href="css/bootstrap.min.css" rel="stylesheet" />
+		<link href="css/yourdashboard.css" rel="stylesheet" />
 		<?php
 			foreach(getDashletCssFiles() as $cssFile)
 			{
 				echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/dashlets/$cssFile\" />";
 			}
 		?>
+
+
+		<!-- JS: jQuery, bootstrap, typeahead, smartmenues, bootstrap-datepicker and yourCMDB custom -->
+		<script src="js/jquery-1.11.3.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/yourdashboard.js"></script>
+
+		<title>yourDashboard</title>
 	</head>
 	<body>
+		<noscript><p>You need to enable JavaScript for yourCMDB.</p></noscript>
 		<?php
 			//alarm handling
 			if($alarmConfig->isEnabled())
