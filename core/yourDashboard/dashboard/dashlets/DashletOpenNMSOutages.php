@@ -149,7 +149,7 @@ class DashletOpenNMSOutages extends Dashlet
 
 		//generate output
 		$output = "";
-		$output .= "<h1>$title</h1>";
+		$output .= "<h1 class=\"text-center\">$title</h1>";
 		$output .= "<table class=\"severity\">";
 		$i = 0;
 		//if there are no outages

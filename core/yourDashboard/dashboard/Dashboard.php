@@ -69,7 +69,7 @@ class Dashboard
 				$refreshInterval = $row[$i]->getRefreshInterval();
 
 				echo "<div class=\"col-md-$colWidth dashboard-dashlet\">\n";
-				echo "<div class=\"dashboard-dashlet-content\" id=\"dashlet-$j-$i\">\n";
+				echo "<div class=\"dashboard-dashlet-content table-responsive\" id=\"dashlet-$j-$i\">\n";
 				echo "<img src=\"img/icons/waiting.gif\" alt=\"loading...\" class=\"progressbar\" />\n";
 				echo "<p class=\"progressbar\">Loading dashlet, please wait...</p>";
 				echo "<script type=\"text/javascript\">startDashletLoader('$this->name', $j, $i, $refreshInterval)</script>\n";

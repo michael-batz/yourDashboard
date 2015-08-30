@@ -36,7 +36,7 @@ class DashletError extends Dashlet
 	*/
 	public function getHtmlContentString()
 	{
-		$output = "<h1>Ooops: Dashlet Error</h1>";
+		$output = "<h1 class=\"text-center\">Ooops: Dashlet Error</h1>";
 		$output .= "<img class=\"DashletError-icon\" src=\"img/icons/critical.png\" />";
 		$output .= "<div class=\"DashletError-text\"><p>";
 		$output .= "Sorry, there was an error loading the dashlet.";

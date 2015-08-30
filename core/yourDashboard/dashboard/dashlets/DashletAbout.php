@@ -36,7 +36,7 @@ class DashletAbout extends Dashlet
 		$controller = new Controller();
 		$version = $controller->getVersion();
 
-		$output = "<h1>about: yourDashboard</h1>";
+		$output = "<h1 class=\"text-center\">about: yourDashboard</h1>";
 		$output .= "<img class=\"DashletAbout-icon\" src=\"img/logo.png\" />";
 		$output .= "<div class=\"DashletAbout-text\">";
 		$output .= "<p>";

@@ -56,7 +56,7 @@ class DashletOtrsQueue extends Dashlet
 		$tickets = $connector->getTickets($queue, $ticketStates, $maxEntries + 1);
 
 		//start output
-		$output = "<h1>$title</h1>";
+		$output = "<h1 class=\"text-center\">$title</h1>";
 		$output .= "<table class=\"severity\">";
 
 		//output of ticket summary
