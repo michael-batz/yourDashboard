@@ -24,6 +24,10 @@
 * yourDashboard HTML footer
 * @author: Michael Batz <michael@yourcmdb.org>
 */
+		//close content container
+		echo "</div>";
+
+		//close page
+		echo "</body>";
+		echo "</html>";
 ?>
-	</body>
-</html>

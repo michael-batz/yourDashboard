@@ -68,37 +68,14 @@
 			//show header
 			if($customizingConfig->getShowHeader())
 			{?>
-				<div class="header">
-					<h1>
-						<img src="<?php echo $customizingConfig->getLogo(); ?>" alt="logo" />
-						<?php echo $customizingConfig->getTitle(); ?>
-					</h1>
-				</div>
-			<?php
-			}
-
-			//show dashboard selector
-			if($customizingConfig->getShowSelector())
-			{?>
-				<div class="dashboardSelector">
-					<form name="dashboardSelector" action="index.php" method="get">
-					Dashboard:
-					<select name="dashboard" onchange="javascript:document.forms['dashboardSelector'].submit()">
-						<?php
-							foreach($dashboardConfig->getDashboardNames() as $allDashboardsName)
-							{
-								if($allDashboardsName == $dashboardName)
-								{
-									echo "<option selected=\"selected\">$allDashboardsName</option>";
-								}
-								else
-								{
-									echo "<option>$allDashboardsName</option>";
-								}
-							}
-							?>
-						</select>
-					</form>
+				<!-- header  -->
+				<div class="page-header dashboard-header">
+					<!-- navigation -->
+					<?php include "navigation.inc.php"; ?>
 				</div>
 			<?php
 			}?>
+
+			<!-- main -->
+			<div class="container-fluid">
+
