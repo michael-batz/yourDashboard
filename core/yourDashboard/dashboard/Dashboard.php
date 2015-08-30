@@ -51,25 +51,33 @@ class Dashboard
 	*/
 	public function render()
 	{
-		echo "<div class=\"dashletContainer\">\n";
 		//go through all rows
 		for($j=0; $j < count($this->dashlets); $j++)
 		{
 			$row = $this->dashlets[$j];
-			echo "<div class=\"dashletRow\">\n";
+
+			//calculate width of columns in bootstrap grid
+			$colWidth = floor(12 / count($row));
+			if($colWidth < 1)
+			{
+				$colWidth = 1;
+			}
+
+			echo "<div class=\"row dashboard-dashlet-row\">\n";
 			for($i=0; $i < count($row); $i++)
 			{
 				$refreshInterval = $row[$i]->getRefreshInterval();
 
-				echo "<div class=\"dashlet\" id=\"dashlet-$j-$i\">\n";
+				echo "<div class=\"col-md-$colWidth dashboard-dashlet\">\n";
+				echo "<div class=\"dashboard-dashlet-content\" id=\"dashlet-$j-$i\">\n";
 				echo "<img src=\"img/icons/waiting.gif\" alt=\"loading...\" class=\"progressbar\" />\n";
 				echo "<p class=\"progressbar\">Loading dashlet, please wait...</p>";
 				echo "<script type=\"text/javascript\">startDashletLoader('$this->name', $j, $i, $refreshInterval)</script>\n";
+				echo "</div>\n";
 				echo "</div>\n\n";
 			}
 			echo "</div>\n";
 		}
-		echo "</div>\n";
 	}
 
 	/**

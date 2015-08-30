@@ -47,7 +47,7 @@ h2
 
 a
 {
-	color:          	#FF0022;
+	color:          	#000000;
 	text-decoration:	none;
 }
 
@@ -144,29 +144,17 @@ div.dashboard-header h1 img
 	color:			#FFFFFF;
 }
 
-
-/*********************** OLD CSS **************************/
-
 /**
 * dashlets
 */
-div.dashletContainer
+div.dashboard-dashlet-row
 {
-	display:		table;
-	table-layout:		fixed;
-	width:			100%;
-	border-spacing:		20px;
+	padding:		20px;
 }
 
-div.dashletRow
+div.dashboard-dashlet-content
 {
-	display:		table-row;
-}
-
-div.dashlet
-{
-	display:		table-cell;
-	vertical-align: 	top;
+	padding:		10px;
 
 	border-style:		solid;
 	border-color:		#CCCCCC;
@@ -174,15 +162,10 @@ div.dashlet
 	border-width:		1px;
 
 	background:		#EEEEEE;
-	
-	width:			100%;
 }
 
-div.dashlet *
-{
-	margin:			10px;
-}
 
+/*********************** OLD CSS **************************/
 div.dashlet h1
 {
 	width:			100%;
