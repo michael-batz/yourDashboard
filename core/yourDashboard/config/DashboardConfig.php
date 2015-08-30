@@ -2,7 +2,7 @@
 /********************************************************************
 * This file is part of yourDashboard.
 *
-* Copyright 2014 Michael Batz
+* Copyright 2014-2015 Michael Batz
 *
 *
 * yourDashboard is free software: you can redistribute it and/or modify
@@ -19,6 +19,12 @@
 * along with yourDashboard.  If not, see <http://www.gnu.org/licenses/>.
 *
 *********************************************************************/
+namespace yourDashboard\config;
+
+use yourDashboard\dashboard\Dashboard;
+use yourDashboard\dashboard\DashboardException;
+use yourDashboard\dashboard\DashletParameter;
+use yourDashboard\dashboard\dashlets\DashletError;
 
 /**
 * dashboard configuration - reads xml configuration and generate dashboards
@@ -29,6 +35,8 @@ class DashboardConfig
 
 	//array of dashboard objects (name -> dashboard object)
 	private $dashboards;
+
+	const CONF_DASHLET_CLASS_PATH = 'yourDashboard\dashboard\dashlets';
 
 	/**
 	* Creates a dashboard configuration object
@@ -55,6 +63,7 @@ class DashboardConfig
 				{
 					//save class
 					$dashletClass = (string)$dashlet['class'];
+					$dashletClass = self::CONF_DASHLET_CLASS_PATH ."\\" .$dashletClass;
 
 					//save refresh interval
 					$dashletRefresh = (string)$dashlet['refresh'];

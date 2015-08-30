@@ -2,7 +2,7 @@
 /********************************************************************
 * This file is part of yourDashboard.
 *
-* Copyright 2014 Michael Batz
+* Copyright 2014-2015 Michael Batz
 *
 *
 * yourDashboard is free software: you can redistribute it and/or modify
@@ -19,28 +19,34 @@
 * along with yourDashboard.  If not, see <http://www.gnu.org/licenses/>.
 *
 *********************************************************************/
+namespace yourDashboard\dashboard\dashlets;
+
+use yourDashboard\dashboard\Dashlet;
+use yourDashboard\controller\Controller;
 
 /**
-* error dashlet: shown when dashlet class not found
+* about dashlet: shows some information about yourdashboard
 * @author: Michael Batz <michael@yourcmdb.org>
 */
-class DashletError extends Dashlet
+class DashletAbout extends Dashlet
 {
 
-	/**
-	* parameters:
-	* - message: error message
-	*/
 	public function getHtmlContentString()
 	{
-		$output = "<h1>Ooops: Dashlet Error</h1>";
-		$output .= "<img class=\"DashletError-icon\" src=\"img/icons/critical.png\" />";
-		$output .= "<div class=\"DashletError-text\"><p>";
-		$output .= "Sorry, there was an error loading the dashlet.";
+		$controller = new Controller();
+		$version = $controller->getVersion();
+
+		$output = "<h1>about: yourDashboard</h1>";
+		$output .= "<img class=\"DashletAbout-icon\" src=\"img/logo.png\" />";
+		$output .= "<div class=\"DashletAbout-text\">";
+		$output .= "<p>";
+		$output .= "version: $version";
 		$output .= "<br />";
-		$output .= "reason: ". $this->parameter->getValue("message");
+		$output .= "&copy; 2014-2015 Michael Batz";
 		$output .= "<br />";
-		$output .= "We will try to reload the dashlet in the configured interval...";
+		$output .= "yourDasboard is free software. Your can redistribute/modify/use it under the terms of GPLv3";
+		$output .= "<br />";
+		$output .= "For more information, please see <a href=\"http://www.yourdashboard.org\" target=\"_blank\">http://www.yourdashboard.org</a>";
 		$output .= "</p>";
 		$output .= "</div>";
 		return $output;

@@ -2,7 +2,7 @@
 /********************************************************************
 * This file is part of yourDashboard.
 *
-* Copyright 2014 Michael Batz
+* Copyright 2014-2015 Michael Batz
 *
 *
 * yourDashboard is free software: you can redistribute it and/or modify
@@ -19,56 +19,49 @@
 * along with yourDashboard.  If not, see <http://www.gnu.org/licenses/>.
 *
 *********************************************************************/
+namespace yourDashboard\config;
 
 /**
-* dashlet for dashboard
+* alarm configuration - reads xml configuration and provides configuration
+* about alarming options of dashboard content
 * @author: Michael Batz <michael@yourcmdb.org>
 */
-abstract class Dashlet
+class AlarmConfig
 {
-	//dashlet refresh interval [ms]
-	protected $refresh;
-	
-	//dashlet parameters
-	protected $parameter;
+
+	//alarming enabled
+	private $enabled;
+
+	//soundfile
+	private $soundfile;
 
 	/**
-	* Create a new dashlet
-	* @param $refresh	refresh interval [ms]
-	* @param $parameter	dashlet parameter
+	* Creates an alarming configuration object
 	*/
-	function __construct($refresh, DashletParameter $parameter)
+	function __construct($xmlfilename)
 	{
-		$this->refresh = $refresh;
-		$this->parameter = $parameter;
-	}
+		//read xml file and generate objects
+		$xmlobject = simplexml_load_file($xmlfilename);
 
-	public function getRefreshInterval()
-	{
-		return $this->refresh;
+		$this->enabled= (string)$xmlobject->enabled[0];
+		$this->soundfile = (string)$xmlobject->soundfile[0];
 	}
 
 
 	/**
-	* return HTML last updated output string
+	* return if dashboard is enabled
 	*/
-	public function getHtmlLastUpdateString()
+	public function isEnabled()
 	{
-		$displayUpdateString = $this->parameter->getValue("displayUpdateString");
-		$output = "";
-		if($displayUpdateString != "false")
-		{
-			$output .= "<div class=\"updatestring\">Last Update: ";
-			$output .= date("d.m.Y - H:i");
-			$output .= "</div>";
-		}
-		return $output;
+		return $this->enabled;
 	}
 
 	/**
-	* return HTML output of dashlet
+	* return soundfile
 	*/
-	abstract public function getHtmlContentString();
-
+	public function getSoundfile()
+	{
+		return $this->soundfile;
+	}
 }
 ?>

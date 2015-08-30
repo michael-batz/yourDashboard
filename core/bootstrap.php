@@ -1,3 +1,4 @@
+<?php
 /********************************************************************
 * This file is part of yourDashboard.
 *
@@ -19,16 +20,18 @@
 *
 *********************************************************************/
 
-
 /**
-* CSS for error dashlet
+* yourDashboard bootstrap
+* must be included
+* @author Michael Batz <michael@yourcmdb.org>
 */
-img.DashletAbout-icon
-{
-	float:			left;
-}
 
-div.DashletAbout-text
-{
-	margin-left:		150px;
-}
+//define base directories
+$scriptBaseDir = dirname(__FILE__);
+$coreBaseDir = realpath("$scriptBaseDir");
+
+//configure class loading
+require_once "ClassLoader.php";
+//class loading: yourDashboard
+new ClassLoader("yourDashboard", "$coreBaseDir");
+?>

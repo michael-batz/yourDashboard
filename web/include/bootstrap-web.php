@@ -2,7 +2,7 @@
 /********************************************************************
 * This file is part of yourDashboard.
 *
-* Copyright 2014 Michael Batz
+* Copyright 2014-2015 Michael Batz
 *
 *
 * yourDashboard is free software: you can redistribute it and/or modify
@@ -21,46 +21,24 @@
 *********************************************************************/
 
 /**
-* alarm configuration - reads xml configuration and provides configuration
-* about alarming options of dashboard content
-* @author: Michael Batz <michael@yourcmdb.org>
+* yourDashboard bootstrap for WebUI
+* must be included
+* @author Michael Batz <michael@yourcmdb.org>
 */
-class AlarmConfig
-{
 
-	//alarming enabled
-	private $enabled;
+//imports
+use yourDashboard\controller\Controller;
 
-	//soundfile
-	private $soundfile;
+//define base directories
+$webScriptBaseDir = dirname(__FILE__);
+$coreBaseDir = realpath("$webScriptBaseDir/../../core");
 
-	/**
-	* Creates an alarming configuration object
-	*/
-	function __construct($xmlfilename)
-	{
-		//read xml file and generate objects
-		$xmlobject = simplexml_load_file($xmlfilename);
+//include yourCMDB bootstrap
+include "$coreBaseDir/bootstrap.php";
 
-		$this->enabled= (string)$xmlobject->enabled[0];
-		$this->soundfile = (string)$xmlobject->soundfile[0];
-	}
+//include function definitions
+include "functions.inc.php";
 
-
-	/**
-	* return if dashboard is enabled
-	*/
-	public function isEnabled()
-	{
-		return $this->enabled;
-	}
-
-	/**
-	* return soundfile
-	*/
-	public function getSoundfile()
-	{
-		return $this->soundfile;
-	}
-}
+//define variables
+$controller = new Controller();
 ?>

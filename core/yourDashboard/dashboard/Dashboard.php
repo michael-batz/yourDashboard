@@ -2,7 +2,7 @@
 /********************************************************************
 * This file is part of yourDashboard.
 *
-* Copyright 2014 Michael Batz
+* Copyright 2014-2015 Michael Batz
 *
 *
 * yourDashboard is free software: you can redistribute it and/or modify
@@ -19,6 +19,9 @@
 * along with yourDashboard.  If not, see <http://www.gnu.org/licenses/>.
 *
 *********************************************************************/
+namespace yourDashboard\dashboard;
+
+use yourDashboard\dashboard\dashlets\DashletError;
 
 /**
 * a concrete dashboard

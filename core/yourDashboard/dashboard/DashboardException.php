@@ -2,7 +2,7 @@
 /********************************************************************
 * This file is part of yourDashboard.
 *
-* Copyright 2014 Michael Batz
+* Copyright 2014-2015 Michael Batz
 *
 *
 * yourDashboard is free software: you can redistribute it and/or modify
@@ -19,12 +19,15 @@
 * along with yourDashboard.  If not, see <http://www.gnu.org/licenses/>.
 *
 *********************************************************************/
+namespace yourDashboard\dashboard;
+
+use \Exception;
 
 /**
-* Exception, if something went wrong in Dashlet
+* Exception, if something went wrong in Dashboard
 * @author Michael Batz <michael@yourcmdb.org>
 */
-class DashletException extends Exception
+class DashboardException extends Exception
 {
 
 	public function __construct($message, $code = 0)

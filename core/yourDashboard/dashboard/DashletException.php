@@ -2,7 +2,7 @@
 /********************************************************************
 * This file is part of yourDashboard.
 *
-* Copyright 2014 Michael Batz
+* Copyright 2014-2015 Michael Batz
 *
 *
 * yourDashboard is free software: you can redistribute it and/or modify
@@ -19,18 +19,20 @@
 * along with yourDashboard.  If not, see <http://www.gnu.org/licenses/>.
 *
 *********************************************************************/
+namespace yourDashboard\dashboard;
+
+use \Exception;
 
 /**
-* dummy dashlet to test the functionality
-* @author: Michael Batz <michael@yourcmdb.org>
+* Exception, if something went wrong in Dashlet
+* @author Michael Batz <michael@yourcmdb.org>
 */
-class DashletDummy extends Dashlet
+class DashletException extends Exception
 {
 
-	public function getHtmlContentString()
+	public function __construct($message, $code = 0)
 	{
-		$output = "<p>Lorem Ipsum...<br />Date: ".date("d.m.y H:i:s") . "</p>";
-		return $output;
+        	parent::__construct($message, $code);
 	}
 
 }

@@ -2,7 +2,7 @@
 /********************************************************************
 * This file is part of yourDashboard.
 *
-* Copyright 2014 Michael Batz
+* Copyright 2014-2015 Michael Batz
 *
 *
 * yourDashboard is free software: you can redistribute it and/or modify
@@ -19,6 +19,7 @@
 * along with yourDashboard.  If not, see <http://www.gnu.org/licenses/>.
 *
 *********************************************************************/
+namespace yourDashboard\config;
 
 /**
 * Access to configuration of yourDasgboard
@@ -40,7 +41,7 @@ class Config
 	*/
 	function __construct()
 	{
-		$configurationBase = realpath(dirname(__FILE__)."/../../etc");
+		$configurationBase = realpath(dirname(__FILE__)."/../../../etc");
 		$this->configDashboard = new DashboardConfig("$configurationBase/dashboard-configuration.xml");
 		$this->configCustomizing = new CustomizingConfig("$configurationBase/customizing-configuration.xml");
 		$this->configAlarm = new AlarmConfig("$configurationBase/alarm-configuration.xml");

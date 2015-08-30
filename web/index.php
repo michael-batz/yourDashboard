@@ -2,7 +2,7 @@
 /********************************************************************
 * This file is part of yourDashboard.
 *
-* Copyright 2014 Michael Batz
+* Copyright 2014-2015 Michael Batz
 *
 *
 * yourDashboard is free software: you can redistribute it and/or modify
@@ -26,14 +26,13 @@
 */
 
 //load base functions and header
-require("include/base.php");
+require("include/bootstrap-web.php");
 
 //get dashboard name
 $dashboardName = getHttpGetVar("dashboard", "default");
 $errorMessage = "";
 
 //open dashboard
-$controller = new Controller();
 try
 {
 	$dashboard = $controller->getDashboardObject($dashboardName);

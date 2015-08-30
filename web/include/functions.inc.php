@@ -2,7 +2,7 @@
 /********************************************************************
 * This file is part of yourDashboard.
 *
-* Copyright 2014 Michael Batz
+* Copyright 2014-2015 Michael Batz
 *
 *
 * yourDashboard is free software: you can redistribute it and/or modify
@@ -26,24 +26,6 @@
 * @author: Michael Batz <michael@yourcmdb.org>
 */
 
-
-/**
-* autoloading of classes
-*/
-function __autoload($className)
-{
-	$scriptBaseDir = dirname(__FILE__);
-	$coreBaseDir = realpath("$scriptBaseDir/../../core");
-	$paths = array('', 'dashboard', 'dashboard/dashlets', 'config', 'controller', 'connectors');
-	$filename = $className.'.php';
-	foreach($paths as $path)
-	{
-		if(file_exists("$coreBaseDir/$path/$filename"))
-		{
-			include "$coreBaseDir/$path/$filename";
-		}
-	}
-}
 
 /**
 * gets an HTTP GET variable or returns a default value
