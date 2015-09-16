@@ -164,6 +164,125 @@ div.dashboard-dashlet-content
 	background:		#EEEEEE;
 }
 
+/**
+* tables
+*/
+td.dashboard-nowrap
+{
+	white-space: 		nowrap;
+}
+
+
+
+/**
+* severity tables
+*/
+table.dashboard-severity
+{
+	width:				85%;
+	margin-left:			auto;
+	margin-right:			auto;
+	
+	border-spacing: 		0px;
+	border-collapse:		separate;
+}
+
+table.dashboard-severity td
+{	
+	border-bottom:			1px solid;
+	border-top:			1px solid;
+	padding:			15px;
+	min-width:			50px;
+}
+
+table.dashboard-severity td:first-child
+{
+	border-left:			1px solid;
+	border-top-left-radius:		5px;
+	border-bottom-left-radius:	5px;
+	background-repeat:		no-repeat;
+	background-position:		10px center;
+}
+table.dashboard-severity td:first-child:before
+{
+	font-family:			"Glyphicons Halflings";
+	font-size:			2em;
+	margin: 			20px;
+}
+
+table.dashboard-severity td:last-child
+{
+	border-right:			1px solid;
+	border-top-right-radius:	5px;
+	border-bottom-right-radius:	5px;
+}
+
+tr.dashboard-severity-critical td, tr.dashboard-severity-critical td:first-child, tr.dashboard-severity-critical td:last-child
+{
+	border-color:		#C00;
+	background-color:	#F5CDCD;
+}
+tr.dashboard-severity-critical td:first-child:before
+{
+	content:"\e104";
+	color:			#C00;
+}
+
+tr.dashboard-severity-major td, tr.dashboard-severity-major td:first-child, tr.dashboard-severity-major td:last-child
+{
+	border-color:		#F30;
+	background-color:	#FFD7CD;
+}
+tr.dashboard-severity-major td:first-child:before
+{
+	content:"\e088";
+	color:			#F30;
+}
+
+
+tr.dashboard-severity-minor td, tr.dashboard-severity-minor td:first-child, tr.dashboard-severity-minor td:last-child
+{
+	border-color:		#F90;
+	background-color:	#FFEBCD;
+}
+tr.dashboard-severity-minor td:first-child:before
+{
+	content:"\e101";
+	color:			#F90;
+}
+
+tr.dashboard-severity-warning td, tr.dashboard-severity-warning td:first-child, tr.dashboard-severity-warning td:last-child
+{
+	border-color:		#FC0;
+	background-color:	#FFF5CD;
+}
+tr.dashboard-severity-warning td:first-child:before
+{
+	content:"\e107";
+	color:			#FC0;
+}
+
+tr.dashboard-severity-info td, tr.dashboard-severity-info td:first-child, tr.dashboard-severity-info td:last-child
+{
+	border-color:		#360;
+	background-color:	#D7E1CD;
+}
+tr.dashboard-severity-info td:first-child:before
+{
+	content:"\e086";
+	color:			#360;
+}
+
+tr.dashboard-severity-cleared td, tr.dashboard-severity-cleared td:first-child, tr.dashboard-severity-cleared td:last-child
+{
+	border-color:		#CCC;
+	background-color:	#CCC;
+}
+tr.dashboard-severity-cleared td:first-child:before
+{
+	content:"\e013";
+}
+
 
 /*********************** OLD CSS **************************/
 div.dashlet h1
@@ -203,101 +322,3 @@ p.progressbar
 	text-align:		center;
 }
 
-/**
-* severity tables
-*/
-table.severity
-{
-	width:				85%;
-	margin-left:			auto;
-	margin-right:			auto;
-	
-	border-spacing: 		0px;
-	border-collapse:		separate;
-}
-
-table.severity td
-{	
-	border-bottom:			1px solid;
-	border-top:			1px solid;
-	padding:			15px;
-	min-width:			50px;
-}
-
-table.severity td:first-child
-{
-	border-left:			1px solid;
-	border-top-left-radius:		5px;
-	border-bottom-left-radius:	5px;
-	background-repeat:		no-repeat;
-	background-position:		10px center;
-	padding-left:			60px;
-}
-
-table.severity td:last-child
-{
-	border-right:			1px solid;
-	border-top-right-radius:	5px;
-	border-bottom-right-radius:	5px;
-}
-
-
-tr.critical td, tr.critical td:first-child, tr.critical td:last-child
-{
-	border-color:		#C00;
-	background-color:	#F5CDCD;
-}
-tr.critical td:first-child
-{
-	background-image:	url(../img/icons/critical.png);
-}
-
-tr.major td, tr.major td:first-child, tr.major td:last-child
-{
-	border-color:		#F30;
-	background-color:	#FFD7CD;
-}
-tr.major td:first-child
-{
-	background-image:	url(../img/icons/major.png);
-}
-
-tr.minor td, tr.minor td:first-child, tr.minor td:last-child
-{
-	border-color:		#F90;
-	background-color:	#FFEBCD;
-}
-tr.minor td:first-child
-{
-	background-image:	url(../img/icons/minor.png);
-}
-
-tr.warning td, tr.warning td:first-child, tr.warning td:last-child
-{
-	border-color:		#FC0;
-	background-color:	#FFF5CD;
-}
-tr.warning td:first-child
-{
-	background-image:	url(../img/icons/warning.png);
-}
-
-tr.info td, tr.info td:first-child, tr.info td:last-child
-{
-	border-color:		#360;
-	background-color:	#D7E1CD;
-}
-tr.info td:first-child
-{
-	background-image:	url(../img/icons/info.png);
-}
-
-tr.cleared td, tr.cleared td:first-child, tr.cleared td:last-child
-{
-	border-color:		#CCC;
-	background-color:	#CCC;
-}
-tr.cleared td:first-child
-{
-	background-image:	url(../img/icons/cleared.png);
-}

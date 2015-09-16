@@ -22,6 +22,7 @@
 namespace yourDashboard\dashboard\dashlets;
 
 use yourDashboard\dashboard\Dashlet;
+use yourDashboard\dashboard\DashletException;
 use yourDashboard\connectors\ConnectorOpenNMS;
 
 /**
@@ -175,12 +176,12 @@ class DashletOpenNMSAlarms extends Dashlet
 		//generate output
 		$output = "";
 		$output .= "<h1 class=\"text-center\">$title</h1>";
-		$output .= "<table class=\"severity\">";
+		$output .= "<table class=\"dashboard-severity\">";
 		$i = 0;
 		//if there are no alarms
 		if(count($alarmRecords) <= 0)
 		{
-			$output .= "<tr class=\"cleared\"><td>no alarms</td></tr>";
+			$output .= "<tr class=\"dashboard-severity-cleared\"><td>no alarms</td></tr>";
 		}
 		foreach($alarmRecords as $alarm)
 		{
@@ -243,14 +244,14 @@ class DashletOpenNMSAlarms extends Dashlet
 			}
 
 			//create output
-			$output .= "<tr class=\"$outputSeverity\">";
+			$output .= "<tr class=\"dashboard-severity-$outputSeverity\">";
 			$output .= "<td><a href=\"$linkUrlBase/alarm/detail.htm?id={$alarm['id']}\" target=\"_blank\">{$alarm['id']}</a></td>";
 			$output .= "<td>{$alarm['nodelabel']}</td>";
 			if($paramShowLogmessage != "false")
 			{
 				$output .= "<td>{$alarm['log']}</td>";
 			}
-			$output .= "<td>($alarmIntervalString)</td>";
+			$output .= "<td class=\"dashboard-nowrap\">($alarmIntervalString)</td>";
 			$output .= "</tr>";
 			
 			$i++;
@@ -261,7 +262,7 @@ class DashletOpenNMSAlarms extends Dashlet
 		if($maxEntries != "" && count($alarmRecords) > $maxEntries)
 		{
 			$countMissing = count($alarmRecords) - $maxEntries;
-			$output .= "<tr class=\"major\"><td colspan=\"4\">$countMissing more alarms...</td></tr>";
+			$output .= "<tr class=\"dashboard-severity-major\"><td colspan=\"4\">$countMissing more alarms...</td></tr>";
 		}
 
 		$output  .= "</table>";

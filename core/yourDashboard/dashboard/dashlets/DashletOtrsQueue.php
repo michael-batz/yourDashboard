@@ -22,6 +22,7 @@
 namespace yourDashboard\dashboard\dashlets;
 
 use yourDashboard\dashboard\Dashlet;
+use yourDashboard\dashboard\DashletException;
 use yourDashboard\connectors\ConnectorOtrs;
 
 /**
@@ -57,7 +58,7 @@ class DashletOtrsQueue extends Dashlet
 
 		//start output
 		$output = "<h1 class=\"text-center\">$title</h1>";
-		$output .= "<table class=\"severity\">";
+		$output .= "<table class=\"dashboard-severity\">";
 
 		//output of ticket summary
 		$i = 0;
@@ -69,10 +70,10 @@ class DashletOtrsQueue extends Dashlet
 			}
 			$ticket = $connector->getTicketSummary($ticketId);
 			
-			$output .= "<tr class=\"cleared\">";
+			$output .= "<tr class=\"dashboard-severity-cleared\">";
 			$output .= "<td><a href=\"$linkUrlBase/index.pl?Action=AgentTicketZoom;TicketID={$ticket['TicketID']}\" target=\"_blank\">{$ticket['TicketNumber']}</a></td>";
 			$output .= "<td>{$ticket['Title']}</td>";
-			$output .= "<td>(".$this->getAgeString($ticket['Age']).")</td>";
+			$output .= "<td class=\"dashboard-nowrap\">(".$this->getAgeString($ticket['Age']).")</td>";
 			$output .= "</tr>";
 			$i++;
 		}
@@ -80,13 +81,13 @@ class DashletOtrsQueue extends Dashlet
 		//output, if there are further tickets
 		if(count($tickets) > $maxEntries)
 		{
-			$output .= "<tr class=\"cleared\"><td colspan=\"3\">more tickets in configured queues...</td></tr>";
+			$output .= "<tr class=\"dashboard-severity-cleared\"><td colspan=\"3\">more tickets in configured queues...</td></tr>";
 		}
 
 		//output if no tickets were found
 		if(count($tickets) <= 0)
 		{
-			$output .= "<tr class=\"cleared\"><td colspan=\"3\">no tickets in configured queues.</td></tr>";
+			$output .= "<tr class=\"dashboard-severity-cleared\"><td colspan=\"3\">no tickets in configured queues.</td></tr>";
 		}
 
 		//output footer
