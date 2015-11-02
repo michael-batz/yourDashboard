@@ -275,12 +275,13 @@ tr.dashboard-severity-info td:first-child:before
 
 tr.dashboard-severity-cleared td, tr.dashboard-severity-cleared td:first-child, tr.dashboard-severity-cleared td:last-child
 {
-	border-color:		#CCC;
-	background-color:	#CCC;
+	border-color:		#360;
+	background-color:	#D7E1CD;
 }
 tr.dashboard-severity-cleared td:first-child:before
 {
 	content:"\e013";
+	color:			#360;
 }
 
 

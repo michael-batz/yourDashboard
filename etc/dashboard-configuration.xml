@@ -36,6 +36,37 @@
 			</dashlet>
 		</row>
 	</dashboard>
+	<dashboard name="alarms">
+		<row>	
+			<dashlet class="DashletClock" refresh="10000">
+				<parameter key="location" value="Berlin, DE" />
+				<parameter key="clockDiffUTC" value="+1" />
+				<parameter key="clockSummertime" value="true" />
+				<parameter key="displayUpdateString" value="false" />
+			</dashlet>
+		</row>
+		<row>
+			<dashlet class="DashletOpenNMSOutages" refresh="30000">
+				<parameter key="title" value="Outages" />
+				<parameter key="restUrl" value="http://demo.opennms.org/opennms/rest" />
+				<parameter key="restUser" value="demo" />
+				<parameter key="restPassword" value="demo" />
+				<parameter key="linkUrlBase" value="http://demo.opennms.org/opennms" />
+				<parameter key="maxEntries" value="10" />
+				<parameter key="createAlarms" value="false" />
+			</dashlet>
+			<dashlet class="DashletOpenNMSAlarms" refresh="30000">
+				<parameter key="title" value="Threshold Alarms" />
+				<parameter key="restUrl" value="http://demo.opennms.org/opennms/rest" />
+				<parameter key="restUser" value="demo" />
+				<parameter key="restPassword" value="demo" />
+				<parameter key="linkUrlBase" value="http://demo.opennms.org/opennms" />
+				<parameter key="ueiFilter" value="uei.opennms.org/threshold" />
+				<parameter key="maxEntries" value="10" />
+				<parameter key="createAlarms" value="false" />
+			</dashlet>
+		</row>
+	</dashboard>
 	<dashboard name="clocks">
 		<row>
 			<dashlet class="DashletClock" refresh="10000">
