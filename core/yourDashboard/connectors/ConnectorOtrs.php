@@ -21,6 +21,7 @@
 *********************************************************************/
 namespace yourDashboard\connectors;
 
+use \SoapClient;
 use \SoapParam;
 
 /**
