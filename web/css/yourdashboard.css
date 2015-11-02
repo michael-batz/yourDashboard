@@ -164,6 +164,30 @@ div.dashboard-dashlet-content
 	background:		#EEEEEE;
 }
 
+div.dashboard-dashlet-content div.updatestring
+{
+	padding-top:		15px;
+	text-align:		right;
+	color:			#999999;
+	font-size:		9pt;
+	font-style:		italic;
+}
+
+div.dashboard-dashlet-content img.progressbar
+{
+	display: 		block;
+	margin-left: 		auto;
+	margin-right: 		auto;
+}
+
+div.dashboard-dashlet-content p.progressbar
+{
+	color:			#999999;
+	font-size:		10pt;
+	text-align:		center;
+}
+
+
 /**
 * tables
 */
@@ -276,50 +300,11 @@ tr.dashboard-severity-info td:first-child:before
 tr.dashboard-severity-cleared td, tr.dashboard-severity-cleared td:first-child, tr.dashboard-severity-cleared td:last-child
 {
 	border-color:		#360;
-	background-color:	#D7E1CD;
+	background-color:	#CCC;
 }
 tr.dashboard-severity-cleared td:first-child:before
 {
 	content:"\e013";
 	color:			#360;
-}
-
-
-/*********************** OLD CSS **************************/
-div.dashlet h1
-{
-	width:			100%;
-	margin:			0px;
-	border-radius:  	5px;
-	padding-top:		3px;
-	padding-bottom:		3px;
-
-	background:		#111111;
-
-	color:			#FFFFFF;
-	font-size:		12pt;
-	text-align:		center;
-}
-
-div.updatestring
-{
-	text-align:		right;
-	color:			#999999;
-	font-size:		9pt;
-	font-style:		italic;
-}
-
-img.progressbar
-{
-	display: 		block;
-	margin-left: 		auto;
-	margin-right: 		auto;
-}
-
-p.progressbar
-{
-	color:			#999999;
-	font-size:		10pt;
-	text-align:		center;
 }
 
