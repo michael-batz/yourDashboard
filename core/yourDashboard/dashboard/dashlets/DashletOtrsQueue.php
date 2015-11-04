@@ -41,20 +41,40 @@ class DashletOtrsQueue extends Dashlet
 		$soapPassword = $this->parameter->getValue("soapPassword");
 		$queue = $this->parameter->getValueArray("queue");
 		$ticketStates = $this->parameter->getValueArray("ticketState");
+		$ticketLock = $this->parameter->getValueArray("ticketLock");
 		$maxEntries = $this->parameter->getValue("maxEntries");
 		$linkUrlBase = $this->parameter->getValue("linkUrlBase");
-		
-		//open connector
-		$connector = new ConnectorOtrs($soapUrl, $soapUser, $soapPassword);
+		$createAlarms = $this->parameter->getValue("createAlarms");
+		$alarmMinTime = $this->parameter->getValue("alarmMinTime");
+		$alarmMaxTime = $this->parameter->getValue("alarmMaxTime");
 
+		//set default values
+		if($alarmMinTime == "")
+		{
+			$alarmMinTime = 0;
+		}
+		if($alarmMaxTime == "")
+		{
+			$alarmMaxTime = 300;
+		}
+	
 		//set default value for ticketState
 		if(count($ticketStates) == 0)
 		{
 			$ticketStates = Array("new", "open");
 		}
+	
+		//set default value for ticketLock
+		if(count($ticketLock) == 0)
+		{
+			$ticketLock = Array("unlock");
+		}
+
+		//open connector
+		$connector = new ConnectorOtrs($soapUrl, $soapUser, $soapPassword);
 
 		//get ticketIDs
-		$tickets = $connector->getTickets($queue, $ticketStates, $maxEntries + 1);
+		$tickets = $connector->getTickets($queue, $ticketStates, $ticketLock, $maxEntries + 1);
 
 		//start output
 		$output = "<h1 class=\"text-center\">$title</h1>";
@@ -69,6 +89,13 @@ class DashletOtrsQueue extends Dashlet
 				break;
 			}
 			$ticket = $connector->getTicketSummary($ticketId);
+
+			//create alarm if configured for every alarm in the given interval
+			if($createAlarms == "true" && $ticket['Age'] >= $alarmMinTime && $ticket['Age'] <= $alarmMaxTime )
+			{
+				echo "<script type=\"text/javascript\">addAlarm('otrsticket-".$ticket["TicketID"]."');</script>";
+			}
+
 			
 			$output .= "<tr class=\"dashboard-severity-warning\">";
 			$output .= "<td><a href=\"$linkUrlBase/index.pl?Action=AgentTicketZoom;TicketID={$ticket['TicketID']}\" target=\"_blank\">{$ticket['TicketNumber']}</a></td>";
