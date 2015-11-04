@@ -8,4 +8,4 @@ yourDashboard is a webbased dashboard engine written in PHP. You can define mult
 <tr><td>Documentation</td><td>http://yourdashboard.org</td></tr>
 </table>
 
-![default](https://cloud.githubusercontent.com/assets/14247054/9832366/e02df6ec-5978-11e5-866d-7ca56f92d4c7.png)
+![default](https://cloud.githubusercontent.com/assets/14247054/10952431/f8580bec-8342-11e5-977e-b6a247068f8b.png)
