@@ -231,6 +231,8 @@ table.dashboard-severity td:first-child:before
 {
 	font-family:			"Glyphicons Halflings";
 	font-size:			2em;
+	display:			inline-block;
+	vertical-align:			middle;
 	margin: 			20px;
 }
 

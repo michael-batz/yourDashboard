@@ -98,7 +98,7 @@ class DashletOtrsQueue extends Dashlet
 
 			
 			$output .= "<tr class=\"dashboard-severity-warning\">";
-			$output .= "<td><a href=\"$linkUrlBase/index.pl?Action=AgentTicketZoom;TicketID={$ticket['TicketID']}\" target=\"_blank\">{$ticket['TicketNumber']}</a></td>";
+			$output .= "<td class=\"dashboard-nowrap\"><a href=\"$linkUrlBase/index.pl?Action=AgentTicketZoom;TicketID={$ticket['TicketID']}\" target=\"_blank\">{$ticket['TicketNumber']}</a></td>";
 			$output .= "<td>{$ticket['Title']}</td>";
 			$output .= "<td class=\"dashboard-nowrap\">(".$this->getAgeString($ticket['Age']).")</td>";
 			$output .= "</tr>";

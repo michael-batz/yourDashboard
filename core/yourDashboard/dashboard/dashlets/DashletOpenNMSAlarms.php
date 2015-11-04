@@ -245,7 +245,7 @@ class DashletOpenNMSAlarms extends Dashlet
 
 			//create output
 			$output .= "<tr class=\"dashboard-severity-$outputSeverity\">";
-			$output .= "<td><a href=\"$linkUrlBase/alarm/detail.htm?id={$alarm['id']}\" target=\"_blank\">{$alarm['id']}</a></td>";
+			$output .= "<td class=\"dashboard-nowrap\"><a href=\"$linkUrlBase/alarm/detail.htm?id={$alarm['id']}\" target=\"_blank\">{$alarm['id']}</a></td>";
 			$output .= "<td>{$alarm['nodelabel']}</td>";
 			if($paramShowLogmessage != "false")
 			{
